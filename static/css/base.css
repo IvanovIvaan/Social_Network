@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: #FAF8FF;
+}
+
+h1 {
+    font-size: 1.2rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+
+
+
+.header {
+    width: 100vw;
+    height: 8.14vh;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2.22vh 5.55vw 2.22vh 5.55vw;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 55vw;
+    height: 3.7vh;
+    align-items: center;
+}
+
+.header-link p {
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    color: #070A1C;
+} 
+
+.links div {
+    padding: 0.5vw;
+    display: flex;
+    border-radius: 3px;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    transition: 0.5s;
+}
+.links div:hover {
+    background-color: #E9E5EE;
+}
+
+.links a {
+    display: flex;
+    flex-direction: row;
+    color: #070A1C;
+}
+
+.icon {
+    height: 2.5vh;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 0.5vw;
+}
+
+.exit-link {
+    border: 1px solid #543C52;
+    border-radius: 100vw !important;
+}
+
+
+/*  */
+
+
+.content {
+    display: flex;
+    width: 100vw;
+    flex-direction: row;
+    padding: 2.22vh 5.55vw 2.22vh 5.55vw;
+}
+
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    width: 24.3vw;
+    gap: 1.5vh;
+}
+
+.profile-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1vw;
+    background-color: white;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.22vh;
+}
+
+.profile-image {
+    height: 8.88vh;
+}
+
+.profile-statistic {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5vw;
+}
+
+.profile-statistic div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5vh;
+}
+
+.profile-statistic p {
+    color: #81818D;
+}
+
+.block-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.block-top div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5vw;
+}
+

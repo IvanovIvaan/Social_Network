@@ -1,0 +1,135 @@
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block meta %}{% endblock %}
+        <title>{% block title %}{% endblock %}</title>
+        {% block links %}{% endblock %}
+        <link rel="stylesheet" href= "{% static 'css/base.css' %}">
+    </head>
+    <body>
+        <header>
+            <nav class= "header">
+                <a href="{% url 'home' %}">
+                    <div class="logo">
+                        <img class="icon" src="{% static 'images/header_logo/logo.png' %}">
+                    </div>
+                </a>
+                
+                <div class="links">
+                    <a href="{% url 'home' %}">
+                        <div class="header-link">
+                            <img class= "icon" src="{% static 'images/header_logo/home.png' %}">
+                            <p>Головна</p>
+                        </div>
+                    </a>
+                    
+                    <a href="{% url 'post' %}">
+                        <div class="header-link">
+                            <img class="icon" src="{% static 'images/header_logo/post.png' %}">
+                            <p>Мої публікації</p>
+                        </div>
+                    </a>
+                    
+                    <a href="{% url 'friends' %}">
+                        <div class="header-link">
+                            <img class="icon" src="{% static 'images/header_logo/friends.png' %}">
+                            <p>Друзі</p>
+                        </div>
+                    </a>
+                    
+                    <a href="">
+                        <div class="header-link">
+                            <img class= "icon" src="{% static 'images/header_logo/chat.png' %}">
+                            <p>Чати</p>
+                        </div>
+                    </a>
+                
+                    <a href="{% url 'settings' %}">
+                        <div class="header-link">
+                            <img class= "icon" src="{% static 'images/header_logo/settings.png' %}">
+                            <p>Налаштування</p>
+                        </div>
+                    </a>
+                
+                    <a href="">
+                        <div class="exit-link">
+                            <img class= "icon" src="{% static 'images/header_logo/exit.png' %}">
+                            <p>Вихід</p>
+                        </div>
+                    </a>
+                </div>
+                
+            </nav>
+            {% block header %}
+            {% endblock %}
+        </header>
+        <main>
+            <div class="content">
+                <div class="side-panel">
+
+                    {% if request.path == '/' or request.path == '/friends/' or request.path == '/post/' %}
+                        <div class="profile-block">
+                            <div class="profile-container">
+                            <img class= "profile-image" src="{% static 'images/profile/linali.png' %}">
+                            <h1>Lina Li</h1>
+                            <p>@thelili</p>
+                            <div class="profile-statistic">
+                                <div>
+                                    <h1>566</h1>
+                                    <p>Дописи</p>
+                                </div>
+                                <hr>
+                                <div>
+                                    <h1>12.1K</h1>
+                                    <p>Читачі</p>
+                                </div>
+                                <hr>
+                                <div>
+                                    <h1>222</h1>
+                                    <p>Друзі</p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        {% if request.path == '/' %}
+                            <div class= "profile-block">
+                                <div class="block-top">
+                                    <div>
+                                        <img class="icon" src="{% static 'images/header_logo/friends.png' %}">
+                                        <p>Запити</p>
+                                    </div>
+                                    <div>
+                                        <p><a href="">Дивитись всі</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class= "profile-block">
+                                <div class="block-top">
+                                    <div>
+                                        <img class="icon" src="{% static 'images/header_logo/chat.png' %}">
+                                        <p>Повідомлення</p>
+                                    </div>
+                                    <div>
+                                        <p><a href="">Дивитись всі</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                {% block content %}{% endblock %}
+            </div>
+            
+
+        </main>
+        <footer>
+            {% block footer %}{% endblock %}
+        </footer>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>
