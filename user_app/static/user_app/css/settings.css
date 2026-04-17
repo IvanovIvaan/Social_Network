@@ -1,18 +1,11 @@
-
-
 .side-panel-links {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    
-    
 }
-
-
 
 .side-panel-links a {
     color: #81818D;
-    
 }
 
 h3 {

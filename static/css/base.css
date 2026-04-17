@@ -9,8 +9,14 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
     background-color: #FAF8FF;
 }
+
 
 h1 {
     font-size: 1.2rem;
@@ -20,10 +26,20 @@ p {
     font-size: 1rem;
 }
 
+.not-available {
+    text-decoration: line-through !important;
+}
 
 
+
+
+header {
+    position: fixed;
+    z-index: 5;
+}
 
 .header {
+    top: 0;
     width: 100vw;
     height: 8.14vh;
     background-color: rgb(255, 255, 255);
@@ -31,6 +47,8 @@ p {
     flex-direction: row;
     justify-content: space-between;
     padding: 2.22vh 5.55vw 2.22vh 5.55vw;
+
+    
 }
 
 .links {
@@ -42,31 +60,22 @@ p {
     align-items: center;
 }
 
-.header-link p {
+.links p {
     font-size: 1rem;
     font-weight: 500;
     text-align: center;
     color: #070A1C;
 } 
 
-.links div {
+.links a {
     padding: 0.5vw;
     display: flex;
     border-radius: 3px;
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    transition: 0.5s;
-}
-.links div:hover {
-    background-color: #E9E5EE;
 }
 
-.links a {
-    display: flex;
-    flex-direction: row;
-    color: #070A1C;
-}
 
 .icon {
     height: 2.5vh;
@@ -88,10 +97,15 @@ p {
 
 
 .content {
+    margin-top: 8.14vh;
+    max-width: 1440px;
     display: flex;
     width: 100vw;
     flex-direction: row;
-    padding: 2.22vh 5.55vw 2.22vh 5.55vw;
+
+    padding-top: 2vh;
+    gap: 1vw;
+
 }
 
 .side-panel {
@@ -99,6 +113,7 @@ p {
     flex-direction: column;
     width: 24.3vw;
     gap: 1.5vh;
+    
 }
 
 .profile-block {
@@ -120,6 +135,10 @@ p {
 
 .profile-image {
     height: 8.88vh;
+}
+
+.profile-image img {
+    height: 100%;
 }
 
 .profile-statistic {
@@ -152,3 +171,8 @@ p {
     gap: 0.5vw;
 }
 
+.right-container {
+    width: 64.1vw;
+    height: 200vh;
+    
+}
