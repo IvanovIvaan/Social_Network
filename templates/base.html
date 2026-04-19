@@ -18,37 +18,40 @@
                     <img class="icon" src="{% static 'images/header_logo/logo.png' %}">
                 </a>
                 
-                <div class="links">
-                    <a href="{% url 'home' %}">
-                        <img class= "icon" src="{% static 'images/header_logo/home.png' %}">
-                        <p>Головна</p>
-                    </a>
-                    
-                    <a href="{% url 'post' %}">
-                        <img class="icon" src="{% static 'images/header_logo/post.png' %}">
-                        <p>Мої публікації</p>
-                    </a>
-                    
-                    <a href="{% url 'friends' %}">
-                        <img class="icon" src="{% static 'images/header_logo/friends.png' %}">
-                        <p>Друзі</p>
-                    </a>
-                    
-                    <a>
-                        <img class= "icon" src="{% static 'images/header_logo/chat.png' %}">
-                        <p class="not-available">Чати</p>
-                    </a>
+                {% if '/user/login/' not in request.url or '/user/registration/' not in request.url %}
                 
-                    <a href="{% url 'settings' %}">
-                        <img class= "icon" src="{% static 'images/header_logo/settings.png' %}">
-                        <p>Налаштування</p>
-                    </a>
-                
-                    <a class="exit-link">
-                        <img class= "icon" src="{% static 'images/header_logo/exit.png' %}">
-                        <p class="not-available">Вихід</p>
-                    </a>
-                </div>
+                    <div class="links">
+                        <a href="{% url 'home' %}">
+                            <img class= "icon" src="{% static 'images/header_logo/home.png' %}">
+                            <p>Головна</p>
+                        </a>
+
+                        <a href="{% url 'post' %}">
+                            <img class="icon" src="{% static 'images/header_logo/post.png' %}">
+                            <p>Мої публікації</p>
+                        </a>
+
+                        <a href="{% url 'friends' %}">
+                            <img class="icon" src="{% static 'images/header_logo/friends.png' %}">
+                            <p>Друзі</p>
+                        </a>
+
+                        <a>
+                            <img class= "icon" src="{% static 'images/header_logo/chat.png' %}">
+                            <p class="not-available">Чати</p>
+                        </a>
+                    
+                        <a href="{% url 'settings' %}">
+                            <img class= "icon" src="{% static 'images/header_logo/settings.png' %}">
+                            <p>Налаштування</p>
+                        </a>
+                    
+                        <a class="exit-link">
+                            <img class= "icon" src="{% static 'images/header_logo/exit.png' %}">
+                            <p class="not-available">Вихід</p>
+                        </a>
+                    </div>
+                {% endif %}
                 
             </nav>
             {% block header %}

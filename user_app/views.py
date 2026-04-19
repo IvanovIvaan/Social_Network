@@ -12,3 +12,15 @@ def render_user(request):
         request= request,
         template_name= 'user.html'
         )
+
+def render_registration(request):
+    return render(
+        request= request,
+        template_name= 'registration.html'
+        )
+
+def render_login(request):
+    return render(
+        request= request,
+        template_name= 'login.html'
+        )

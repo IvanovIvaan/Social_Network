@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'user_app/css/user.css' %}">
+{% endblock %}
+
+
+{% block header %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="main-container">
+        <div class="links-container">
+            <h2><a href="{% url 'registration' %}">Реєстрація<a></h2>
+            <h2><a href="{% url 'login' %}">Авторизація</a></h2>
+        </div>
+        <div>
+            <h3>Приєднуйтеся до World IT</h3>
+        </div>
+        <div class="form-container">
+            <form action="" method= "post">
+                {% csrf_token %}
+                <div class="input-holder">
+                    <p>Електронна пошта</p>
+                    <input type="email">
+                </div>
+                <div class="input-holder">
+                    <p>Пароль</p>
+                    <input type="password">
+                </div>
+                <div class="input-holder">
+                    <p>Підтвердити пароль</p>
+                    <input type="password">
+                </div>
+            </form>
+        </div>
+
+        <button>
+            <h4>Створити акаунт</h4>
+        </button>
+
+
+            <div class="code-inputs">
+                {% for i in "123456" %}
+                    <input type="text" maxlength="1">
+                {% endfor %}
+            </div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}
