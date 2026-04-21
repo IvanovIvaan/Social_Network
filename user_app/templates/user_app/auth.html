@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name= 'csrf-token' content="{{ csrf_token }}">
+{% endblock %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'user_app/css/user.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="main-container">
+        {% include 'user_app/particles/form_registration.html' %}
+        {% include 'user_app/particles/form_login.html' %}
+        {% include 'user_app/particles/form_confirm.html' %}
+    </div>
+    <!-- background image -->
+    <div class="background-image">
+        <img src="{% static 'user_app/images/Auth-Background.png' %}" alt="">
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'user_app/js/authLinks.js' %}"></script>
+{% endblock  %}

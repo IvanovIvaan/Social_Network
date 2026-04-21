@@ -8,14 +8,18 @@ h3 {
 }
 
 .main-container {
+    position: absolute;
+    top: 25vh;
+    left: 17vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 3.75vh;
+    padding: 4.6vh 3vw;
     
     width: 33.82vw;
-    height: 57.5vh;
+    height: fit-content;
     
     background-color: white;
     border-radius: 20px;
@@ -37,14 +41,14 @@ h3 {
     
 }
 
-.form-container {
+/* .form-container {
     display: flex;
     flex-direction: column;
 
     width: 27.8vw;
     height: 25vh;
     
-}
+} */
 
 .input-holder {
     display: flex;
@@ -66,10 +70,70 @@ button {
     justify-content: center;
     align-items: center;
 
+    margin: 2vh 0vw;
     width: 27.8vw;
     height: 5.4vh;
     background-color: #543C52;
     border-radius: 1234px;
     color: white;
-    
+    font-size: 1rem;
+}
+
+.auth-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.auth-links span {
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3.75vh;
+}
+
+.title-text p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.7vh;
+}
+
+form p {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6vh;
+}
+
+form label {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+form input {
+    height: 4.4vh;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    padding: 1vh 1.1vw;
+}
+
+.background-image {
+    position: absolute;
+    top: 27vh;
+    left: 47vw;
+    z-index: -1;
+}
+
+.background-image img {
+    height: 54.8vh;
 }

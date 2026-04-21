@@ -1,9 +1,7 @@
 from django.urls import path
-from .views import render_user, render_settings, render_login, render_registration
+from .views import AuthTemplateView, render_settings
 
 urlpatterns = [
-    path(route= 'user/', view= render_user, name= 'user'),
     path(route= 'settings/', view= render_settings, name= 'settings'),
-    path(route= 'registration/', view= render_registration, name= 'registration'),
-    path(route= 'login/', view= render_login, name= 'login'),
+    path(route= 'auth/', view= AuthTemplateView.as_view(), name= 'auth'),
 ]

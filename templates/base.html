@@ -18,7 +18,7 @@
                     <img class="icon" src="{% static 'images/header_logo/logo.png' %}">
                 </a>
                 
-                {% if '/user/login/' not in request.url or '/user/registration/' not in request.url %}
+                {% if request.path != '/user/auth/' %}
                 
                     <div class="links">
                         <a href="{% url 'home' %}">

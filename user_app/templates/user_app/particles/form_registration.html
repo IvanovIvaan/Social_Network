@@ -1,0 +1,16 @@
+<div class="form-container form-registration">
+    <div class="auth-links">
+        <span>Реєстрація</span>
+        <span>Авторизація</span>
+    </div>
+
+    <div class="title-text">
+        <p>Приєднуйтеся до World IT</p>
+    </div>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form_registration.as_p }}
+        <button type="submit">Створити акаунт</button>
+    </form>
+</div>

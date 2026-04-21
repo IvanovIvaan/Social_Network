@@ -77,7 +77,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Social_Network.wsgi.application'
+ASGI_APPLICATION = 'Social_Network.asgi.application'
 
+AUTH_USER_MODEL = 'user_app.User'
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
