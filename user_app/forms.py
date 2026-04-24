@@ -9,7 +9,7 @@ class EmailUserCreationForm(forms.ModelForm):
         label= 'Password',
         widget= forms.PasswordInput(
             attrs= {
-                'placeholder': 'Введите пароль',
+                'placeholder': 'Введіть пароль',
             })
     )
 
@@ -42,7 +42,7 @@ class EmailUserCreationForm(forms.ModelForm):
         password1 = cleaned_data.get('password1')
         password2 = cleaned_data.get('password2')
         if password1 and password2 and password1 != password2:
-            self.add_error('password2', 'Пароль не співпадають')
+            self.add_error('password2', 'Паролі не співпадають')
         return cleaned_data
     
     def save(self, commit= True):
@@ -54,5 +54,5 @@ class EmailUserCreationForm(forms.ModelForm):
         return user
     
 
-
-
+# class EmailAuthenticationForm(AuthenticationForm):
+    

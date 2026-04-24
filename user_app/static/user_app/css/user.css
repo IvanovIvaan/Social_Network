@@ -7,10 +7,14 @@ h3 {
     
 }
 
+.header-content {
+    justify-content: center !important;
+}
+
 .main-container {
     position: absolute;
     top: 25vh;
-    left: 17vw;
+    left: 24vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +22,7 @@ h3 {
     gap: 3.75vh;
     padding: 4.6vh 3vw;
     
-    width: 33.82vw;
+    width: 27vw;
     height: fit-content;
     
     background-color: white;
@@ -30,25 +34,22 @@ h3 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
-    width: 27.8vw;
-    /* gap: 1.66vw */
-
 }
 
 .links-container a {
     font-size: 2rem;
-    
 }
 
-/* .form-container {
-    display: flex;
-    flex-direction: column;
+.auth-links .active {
+    color: black;
+    text-decoration: underline;
+    text-underline-offset: 1.5vh;
+    text-decoration-thickness: 2px;
+}
 
-    width: 27.8vw;
-    height: 25vh;
-    
-} */
+.auth-links .inactive {
+    color: #81818D;
+}
 
 .input-holder {
     display: flex;
@@ -69,9 +70,8 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-
     margin: 2vh 0vw;
-    width: 27.8vw;
+
     height: 5.4vh;
     background-color: #543C52;
     border-radius: 1234px;
@@ -95,6 +95,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 3.75vh;
+    width: 100%;
 }
 
 .title-text p {

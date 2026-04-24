@@ -1,0 +1,50 @@
+.profile-block {
+    gap: 2vh;
+}
+
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6vh;
+}
+
+
+.contact {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8vw;
+}
+
+.avatar {
+    width: 3vw;
+}
+
+.avatar img {
+    width: 100%;
+    height: auto;
+    
+}
+
+.contact-text {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-around;
+
+    height: fill;
+}
+
+.contact-text h3 {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.contact-list p {
+    font-size: 0.85rem;
+}
+
+.requests p {
+    color: #81818D;
+    
+}

@@ -34,21 +34,25 @@ p {
 
 
 header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     position: fixed;
     z-index: 5;
+    top: 0;
+
+    width: 100vw;
+    background-color: rgb(255, 255, 255);
 }
 
-.header {
-    top: 0;
-    width: 100vw;
-    height: 8.14vh;
-    background-color: rgb(255, 255, 255);
+.header-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 2.22vh 5.55vw 2.22vh 5.55vw;
-
-    
+    align-items: center;
+    width: 100vw;
+    max-width: 1440px;
+    height: 8.14vh;
 }
 
 .links {
@@ -97,7 +101,7 @@ header {
 
 
 .content {
-    margin-top: 8.14vh;
+    margin-top: 7vh;
     max-width: 1440px;
     display: flex;
     width: 100vw;
@@ -111,8 +115,8 @@ header {
 .side-panel {
     display: flex;
     flex-direction: column;
-    width: 24.3vw;
-    gap: 1.5vh;
+    width: 20vw;
+    gap: 1vh;
     
 }
 
@@ -130,7 +134,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2.22vh;
+    gap: 1.7vh;
 }
 
 .profile-image {
@@ -139,6 +143,11 @@ header {
 
 .profile-image img {
     height: 100%;
+}
+
+.nickname {
+    font-size: 1.5rem;
+    font-weight: 900;
 }
 
 .profile-statistic {
@@ -151,8 +160,14 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5vh;
+    gap: 1vh;
 }
+
+.profile-statistic h1 {
+    font-weight: 900;
+}
+
+
 
 .profile-statistic p {
     color: #81818D;
