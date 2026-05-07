@@ -7,11 +7,12 @@
 {% endblock %}
 
 {% block title %}
-    Registration
+    Authentication
 {% endblock %}
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'user_app/css/user.css' %}">
+    <link rel="stylesheet" href="{% static 'user_app/css/confirm.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -27,5 +28,8 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'user_app/js/authLinks.js' %}"></script>
+    <script type="module" src="{% static 'user_app/js/auth.js' %}"></script>
+    <script type="module" src="{% static 'user_app/js/register.js' %}"></script>
+    <script type="module" src="{% static 'user_app/js/login.js' %}"></script>
+    <script type="module" src="{% static 'user_app/js/confirm.js' %}"></script>
 {% endblock  %}

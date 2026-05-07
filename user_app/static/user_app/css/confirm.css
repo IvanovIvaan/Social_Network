@@ -1,0 +1,31 @@
+.input-confirm-code{
+    position: absolute;
+    opacity: 0;
+    /* ??? */
+    pointer-events: None;
+}
+
+.boxes{
+    display: flex;
+    gap: 1vw;
+}
+
+.box{
+    width: 3.5vw;
+    height: 4.7vh;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    /* content: '__'; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 4.7vh;
+
+    cursor: pointer;
+}
+
+.box.active{
+    border-color: #543C52;  
+}

@@ -1,30 +1,37 @@
 {% extends "base.html "%}
 
+{% load static %}
+
+{% block meta %}
+    <meta name= "csrf-token" content= "{{ csrf_token }}">
+{% endblock %}
+
 {% block title %}
     Мої публікації
 {% endblock %}
 
 
 {% block links %}
-
+    <link rel="stylesheet" href="{% static 'post_app/css/post.css' %}">
+    <link rel="stylesheet" href="{% static 'post_app/css/modal_post.css' %}">
 {% endblock %}
-
-
-{% block header %}
-
-{% endblock %}
-
 
 {% block content %}
-    <h1>Сторінка моїх публікацій</h1>
-{% endblock %}
-
-
-{% block footer %}
-
+    {% include 'post_app/particles/form_post_creation.html' %}
+    <div class="container-box" id="container-box">
+        <textarea placeholder="Тукст публікації" id= "publication-text-input" class= "publication-text-input"></textarea>
+        <div class="post-buttons">
+            <button type="button" class="emoji-button">
+                <img src="{% static 'post_app/images/Emoji.png' %}" alt="">
+            </button>
+            <button id="design-button" class="design-button" type="button">
+                Перейти до оформлення
+            </button>
+        </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
-
+    <script type="module" src="{% static 'post_app/js/post.js' %}"></script>
 {% endblock %}
 

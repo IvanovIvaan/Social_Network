@@ -1,16 +1,17 @@
 <div class="form-container form-login" style="display: none;">
-    <div class="auth-links">
-        <span class= "inactive">Реєстрація</span>
+    <nav class="auth-links">
+        <span class= "inactive" id= "register-button">Реєстрація</span>
         <span class= "active">Авторизація</span>
-    </div>
+    </nav>
 
     <div class="title-text">
         <p>Раді тебе знову бачити</p>
     </div>
 
-    <form action="" method="post">
+    <form id='login-form' action="{% url 'login' %}" method="post">
         {% csrf_token %}
         {{ form_login.as_p }}
         <button type="submit">Увійти</button>
     </form>
+    <div id="login-errors"></div>
 </div>

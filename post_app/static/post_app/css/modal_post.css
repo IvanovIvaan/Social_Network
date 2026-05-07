@@ -1,0 +1,217 @@
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modal-background.open {
+    display: flex;
+}
+
+
+.modal-window {
+    background: white;
+    padding: 1.6vw 3vw 3vw 3vw;
+    border-radius: 20px;
+    width: 45.7vw;
+    z-index: 20;
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #070A1C;
+    
+}
+
+.close-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.close-container img {
+    width: 1.4vw;
+    cursor: pointer;
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    padding: 1.6vw 0 0;
+    gap: 1.6vh;
+
+    
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6vh;
+    width: 100%;
+}
+
+.block input, textarea {
+    border: 1px solid #81818D;
+    border-radius: 10px;
+    padding: 0.7vw 1.1vw;
+}
+
+.block input {
+    width: 23.8vw;
+    height: 4.3vh;
+}
+.block textarea {
+    height: 13vh;
+    resize: none;
+}
+textarea::-webkit-scrollbar {
+    width: 0.5vw;
+    height: 10vh;
+}
+textarea::-webkit-scrollbar-track {
+    background: #E9E5EE;
+    border-radius: 5px;
+    height: 10vh;
+    cursor: pointer;
+}
+textarea::-webkit-scrollbar-thumb {
+    background: #543C52;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.image-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 2.2vw;
+    height: 2.2vw;
+    
+    border-radius: 1234px;
+    opacity: 100%;
+
+    cursor: pointer;
+}
+
+
+
+
+/* Посилання */
+
+.links-list {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    width: 23.8vw;
+    max-height: 20vh;
+    overflow-y: scroll;
+}
+
+.links-list::-webkit-scrollbar {
+    width: 0.5vw;
+    height: 10vh;
+}
+.links-list::-webkit-scrollbar-track {
+    background: #E9E5EE;
+    border-radius: 5px;
+    height: 10vh;
+    cursor: pointer;
+}
+.links-list::-webkit-scrollbar-thumb {
+    background: #543C52;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.links-list input {
+    width: 20vw;;
+}
+
+.first-link-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vw;
+}
+
+.first-link-container button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 1.5vw;
+    height: 1.5vw;
+
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: #543C52;
+    
+    border-radius: 1234px;
+
+    background-color: white;
+    border: 1px, solid #543C52;
+
+    cursor: pointer;
+    z-index: 30;
+}
+
+
+
+
+
+
+
+
+/* Нижні кнопки */
+.bottom-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+
+    width: 100%;
+    gap: 0.7vw;
+}
+.button-post {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 9vw;
+    height: 2.2vw;
+
+    border: 1px solid #543C52;
+    border-radius: 1234px;
+    background-color: #543C52;
+    color: white;
+
+    cursor: pointer;
+}
+
+
+input[type="file"] {
+    position: fixed;
+    color: transparent;
+}
+input[type="file"]::file-selector-button {
+    display: none;
+}

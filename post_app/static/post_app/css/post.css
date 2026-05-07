@@ -1,0 +1,78 @@
+.container-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 64vw;
+    height: 12.5vh;
+
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+
+    background-color: white;
+    padding: 1rem;
+    cursor: text;
+}
+
+.publication-text-input {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+
+    overflow: hidden;
+    resize: none;
+}
+
+.post-buttons {
+    display: flex;
+    flex-direction: row;   
+    justify-content: end;
+    
+    height: 4.1vh;
+    gap: 0.9vw;
+    
+}
+
+.emoji-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 2.2vw;
+    height: 2.2vw;
+    padding: 0.7vw;
+    
+    background-color: white;
+    border: 1px, solid #543C52;
+    border-radius: 1234px;
+
+    cursor: pointer;
+}
+.emoji-button img{
+    width: 1.2vw;
+}
+.emoji-button:active {
+    background-color: #c0aebf;
+}
+
+.design-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 13.2vw;
+    height: 2.2vw;
+    padding: 0.7vw;
+    
+    background-color: #543C52;
+    border: 1px, solid #543C52;
+    border-radius: 1234px;
+
+    color: white;  
+    cursor: pointer;
+}
+.design-button:active {
+    background-color: #3f2a3e;
+}

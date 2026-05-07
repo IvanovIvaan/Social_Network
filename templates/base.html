@@ -18,7 +18,7 @@
                     <img class="icon" src="{% static 'images/header_logo/logo.png' %}">
                 </a>
                 
-                {% if request.path != '/user/auth/' %}
+                {% if request.path != '/' %}
                 
                     <div class="links">
                         <a href="{% url 'home' %}">
@@ -26,7 +26,7 @@
                             <p>Головна</p>
                         </a>
 
-                        <a href="{% url 'post' %}">
+                        <a href="{% url 'post_create' %}">
                             <img class="icon" src="{% static 'images/header_logo/post.png' %}">
                             <p>Мої публікації</p>
                         </a>
@@ -46,10 +46,11 @@
                             <p>Налаштування</p>
                         </a>
                     
-                        <a class="exit-link">
+                        <a id="logout-button" class="exit-link" href="{% url 'logout' %}">
                             <img class= "icon" src="{% static 'images/header_logo/exit.png' %}">
-                            <p class="not-available">Вихід</p>
+                            <p>Вихід</p>
                         </a>
+                    
                     </div>
                 {% endif %}
                 
@@ -65,7 +66,7 @@
                 <!-- БОКОВА ПАНЕЛЬ -->
                 <div class="side-panel">
 
-                    {% if request.path == '/' or request.path == '/post/' %}
+                    {% if request.path == '/home/' or request.path == '/post/' %}
                         <div class= "profile-block">
                             <div class="profile-container">
                                 <div class="profile-image">

@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import render_post
+from .views import PostView
 
 urlpatterns = [
-    path(route= '', view= render_post, name= 'post'),
+    path(route= '', view= PostView.as_view(), name= 'post_create'),
 ]

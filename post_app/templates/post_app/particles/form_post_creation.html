@@ -1,0 +1,70 @@
+{% load static %}
+
+<div id="modal-background" class="modal-background">
+    <div class="modal-window">
+        <div class="close-container">
+            <img id="cross" class="cross" src="{% static 'post_app/images/cross.png' %}" alt="">
+        </div>
+        <h1 class= "modal-title">Створення публікації</h1>
+
+        <div id="post-errors"></div>
+    
+        <form class= "post-form" id="post-create-form" method="post" action="{% url 'post_create' %}">
+            {% csrf_token %}
+
+        
+
+            <div class="block">
+                {{ form_post_creation.title.label }}
+                {{ form_post_creation.title }}
+            </div>
+            
+            <div class="block">
+                {{ form_post_creation.topic.label }}
+                {{ form_post_creation.topic }}
+            </div>
+
+            <div class="block">
+                {{ form_post_creation.content }}
+            </div>
+
+            <div class="block">
+                {{ form_post_creation.tags }}
+            </div>
+            
+            
+            <div class="block">
+                <p>Посилання</p>
+                <div id="links-list" class="links-list">
+                    {{ form_post_creation.links }}
+                    <div class= "first-link-container">
+                        <input type="url" name="links" placeholder="https://example.com">
+                        <button type="button" id="add-link">+</button>
+                    </div>
+                    <!-- Сюди додаються посилання -->
+                </div>
+            </div>
+
+            
+
+
+            <div class="bottom-buttons">
+                <button type="button" class="emoji-button">
+                    {{ form_post_creation.images }}
+                    <img src="{% static 'post_app/images/image.png' %}" alt="">
+                </button>
+                <button type="button" class="emoji-button">
+                    <img src="{% static 'post_app/images/Emoji.png' %}" alt="">
+                </button>
+                
+                <button class="button-post" type="submit">Публікація</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% block scripts %}
+    <script type="module" src="{% static 'post_app/js/postCreation.js' %}"></script>
+{% endblock %}

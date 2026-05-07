@@ -74,7 +74,7 @@
 
 {% block content %}
     <h1>Головна Сторінка</h1>
-    <a href="{% url 'auth' %}">Авторизація</a>
+    <!-- <a href="{% url 'auth' %}">Авторизація</a> -->
     
 {% endblock %}
 
@@ -84,6 +84,6 @@
 {% endblock %}
 
 {% block scripts %}
-
+    <script type="module" src="{% static 'home_app/js/home.js' %}"></script>
 {% endblock %}
 
