@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import render_home
+from .views import HomeTemplateView, SetNicknameView
 
 urlpatterns = [
-    path(route= '', view= render_home, name= 'home'),
+    path(route= '', view= HomeTemplateView.as_view(), name= 'home'),
+    path(route= 'setup/', view= SetNicknameView.as_view(), name= 'setnickname'),
 ]

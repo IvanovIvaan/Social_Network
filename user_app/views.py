@@ -70,13 +70,12 @@ class LoginView(View):
             login(request= request, user= user)
             return JsonResponse({
             "success": True,
-            "redirect_url": "home"
+            "redirect_url": "/home"
         })
         
         return JsonResponse({
             "success": False,
             "errors": form.errors.get_json_data(),
-            # "redirect_url": "home"
         }, status= 400)
     
 # LogoutView
@@ -134,7 +133,7 @@ class ConfirmView(View):
             password=register_data['password']
         )
 
-        login(request, user)
+        # login(request, user)
 
         request.session.pop('verification_code', None)
         request.session.pop('register_data', None)

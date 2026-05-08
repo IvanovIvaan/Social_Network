@@ -24,13 +24,14 @@
                 {{ form_post_creation.topic }}
             </div>
 
+            <div class="block-tags">
+                {{ form_post_creation.tags }}
+            </div>
+
             <div class="block">
                 {{ form_post_creation.content }}
             </div>
 
-            <div class="block">
-                {{ form_post_creation.tags }}
-            </div>
             
             
             <div class="block">
@@ -44,6 +45,8 @@
                     <!-- Сюди додаються посилання -->
                 </div>
             </div>
+
+            <div class="preview-images" id="preview-images"></div>
 
             
 
@@ -66,5 +69,7 @@
 </div>
 
 {% block scripts %}
+    <script type="module" src="{% static 'post_app/js/post.js' %}"></script>
     <script type="module" src="{% static 'post_app/js/postCreation.js' %}"></script>
+    <script type="module" src="{% static 'post_app/js/imagePreview.js' %}"></script>
 {% endblock %}

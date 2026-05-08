@@ -1,7 +1,6 @@
 .container-box {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
 
     width: 64vw;
     height: 12.5vh;
@@ -21,14 +20,16 @@
 
     overflow: hidden;
     resize: none;
+    width: 50vw;
 }
 
 .post-buttons {
     display: flex;
     flex-direction: row;   
-    justify-content: end;
+    justify-content: center;
+    align-items: end;
     
-    height: 4.1vh;
+    height: 9vh;
     gap: 0.9vw;
     
 }

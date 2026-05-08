@@ -11,6 +11,7 @@
 
     justify-content: center;
     align-items: center;
+    overflow-y: scroll;
 }
 
 
@@ -20,12 +21,31 @@
 
 
 .modal-window {
+    position: relative;
+    top: 5vh;
     background: white;
     padding: 1.6vw 3vw 3vw 3vw;
     border-radius: 20px;
     width: 45.7vw;
     z-index: 20;
 }
+
+*::-webkit-scrollbar {
+    width: 0.5vw;
+    height: 10vh;
+}
+*::-webkit-scrollbar-track {
+    background: #E9E5EE;
+    border-radius: 5px;
+    height: 10vh;
+    cursor: pointer;
+}
+*::-webkit-scrollbar-thumb {
+    background: #543C52;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 
 .modal-title {
     font-size: 2rem;
@@ -77,6 +97,61 @@
     height: 13vh;
     resize: none;
 }
+
+
+/* ТЕГИ */
+
+.block-tags div {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    
+} 
+
+.block-tags label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.6vh 0.4vw;
+
+    font-size: 0.9rem;
+    background-color: #E9E5EE;
+    border-radius: 6px;
+    color: #543C52;
+    cursor: pointer;
+}
+
+.block-tags input {
+    display: none;
+}
+.block-tags label:has(.tags:checked) {
+    background-color: #543C52;
+    color: #E9E5EE;
+}
+
+
+.tags {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    
+    gap: 0.7vw;
+    flex-wrap: wrap;
+}
+
+.tags div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* СКРОЛБАР Текст Контенту */
 textarea::-webkit-scrollbar {
     width: 0.5vw;
     height: 10vh;
@@ -94,6 +169,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 
+/* КНОПКА ДЛЯ КАРТИНОК */
 .image-input {
     display: flex;
     flex-direction: row;
@@ -120,7 +196,7 @@ textarea::-webkit-scrollbar-thumb {
     align-items: start;
 
     width: 23.8vw;
-    max-height: 20vh;
+    max-height: 11vh;
     overflow-y: scroll;
 }
 
@@ -214,4 +290,35 @@ input[type="file"] {
 }
 input[type="file"]::file-selector-button {
     display: none;
+}
+
+
+/* КАРТИНКИ */
+.preview-images {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+
+    gap: 1vw;
+
+    overflow-x: scroll;
+    border-radius: 10px;
+}
+
+.preview-image {
+    height: 25vh;
+    width: auto;
+
+    border-radius: 10px;
+}
+
+.preview-images::-webkit-scrollbar {
+    width: 100%;
+    height: 0.6vh;
+}
+.preview-images::-webkit-scrollbar-track {
+    background: #E9E5EE;
+    border-radius: 5px;
+    height: 10vh;
+    cursor: pointer;
 }

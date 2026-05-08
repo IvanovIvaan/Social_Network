@@ -1,4 +1,10 @@
-import { getCSRFToken, showLogin, showConfirm, renderErrors } from "./auth.js"
+import { showLogin, showConfirm, renderErrors } from "./auth.js"
+
+const form = document.getElementById('login-form')
+function getCSRFToken() {
+    return form.querySelector('[name=csrfmiddlewaretoken]').value
+}
+
 
 
 document.getElementById('login-form').addEventListener(

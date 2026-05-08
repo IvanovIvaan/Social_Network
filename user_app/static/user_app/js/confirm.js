@@ -15,7 +15,7 @@ document.getElementById('confirm-form').addEventListener(
         fetch(this.action, {
             method: 'POST',
             headers: {
-                'X-CSRFToken': getCSRFToken()
+                'X-CSRFToken': getCSRFToken(),
             },
             body: formData
         })

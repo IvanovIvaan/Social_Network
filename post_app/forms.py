@@ -4,6 +4,7 @@ from django.core.files.base import ContentFile
 from PIL import Image
 from .models import Post, Tag, PostLinks, PostImage, PostView
 
+
 MAX_COMPRESSED_IMAGE_SIZE = 5 * 1024 * 1024
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -21,7 +22,11 @@ class PostCreationForm(forms.ModelForm):
         required = False,
         # queryset = Tag.objects.all(),
         queryset = Tag.objects.none(),
-        widget = forms.CheckboxSelectMultiple()
+        widget = forms.CheckboxSelectMultiple(
+            attrs= {
+                'class': 'tags',
+            }
+        )
     )
     links = forms.CharField(
         # ModelMultipleChoiceField
@@ -37,7 +42,7 @@ class PostCreationForm(forms.ModelForm):
                 'class': 'image-input',
                 'multiple': True,
                 'accept': 'image/*'
-            }) 
+            })
     )
     class Meta:
         model = Post
@@ -66,11 +71,11 @@ class PostCreationForm(forms.ModelForm):
             if clean_link:
                 self.links_list.append(clean_link)
         
-        if images is None:
+        if images is not None:
             self.images_list = list(images)
             # self.images_list = []
-        else:
-            self.images_list = []
+        # else:
+        #     self.images_list = []
 
     def clean(self):
         cleaned_data = super().clean()

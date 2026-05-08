@@ -73,8 +73,17 @@
 
 
 {% block content %}
-    <h1>Головна Сторінка</h1>
-    <!-- <a href="{% url 'auth' %}">Авторизація</a> -->
+
+    <!-- First login -->
+    <div class= "modal-panel-container">
+        <div class="modal-panel">
+            <h1>Додай деталі про себе</h1>
+            <form method="post" action="{% url 'setnickname' %}">
+                {{ form_setnickname.as_p }}
+
+            </form>
+        </div>
+    </div>
     
 {% endblock %}
 

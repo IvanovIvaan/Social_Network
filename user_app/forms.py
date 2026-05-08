@@ -8,7 +8,7 @@ User = get_user_model()
 
 class EmailUserCreationForm(forms.ModelForm):
     password1 = forms.CharField(
-        label= 'Password',
+        label= 'Пароль',
         widget= forms.PasswordInput(
             attrs= {
                 'placeholder': 'Введіть пароль',
@@ -16,7 +16,7 @@ class EmailUserCreationForm(forms.ModelForm):
     )
 
     password2 = forms.CharField(
-        label= 'Password',
+        label= 'Підтвердіть пароль',
         widget= forms.PasswordInput(
             attrs= {
                 'placeholder': 'Повторіть пароль',
@@ -26,6 +26,7 @@ class EmailUserCreationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("email",)
+        labels = {"email": "Електронна пошта",}
         widgets = {
             "email": forms.EmailInput(
                 attrs= {
@@ -107,10 +108,3 @@ class EmailConfirmForm(forms.Form):
                 "autocomplete": "one-time-code",
             })
     )
-    
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     code = cleaned_data.get('code')
-    #     if code and check_verification_code(code) == False:
-    #         self.add_error('input', 'Неправильний код підтвердження')
-    #     return cleaned_data
