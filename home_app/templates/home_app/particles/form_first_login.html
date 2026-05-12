@@ -1,0 +1,30 @@
+{% load static %}
+
+{% if user.is_authenticated and not user.profile_completed %}
+    <!-- First login -->
+    <div class= "first-login">
+        <div class="first-login-window">
+            <h1>Додай деталі про себе</h1>
+            <form id= "set-profile-form" method="post" action="{% url 'setprofile' %}" enctype= "multipart/form-data">
+                {% csrf_token %}
+                <p>
+                    {{ form_profile.nickname.label }}
+                    {{ form_profile.nickname }}
+                </p>
+                <p>
+                    {{ form_profile.username.label }}
+                    {{ form_profile.username }}
+                </p>
+                
+                <div class="profile-button">
+                    <button type="submit"><p>Продовжити</p></button>
+                    <label class="avatar-field">
+                        <p>Завантажити аватар</p>
+                        {{ form_profile.avatar }}
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endif %}

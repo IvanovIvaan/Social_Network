@@ -1,5 +1,5 @@
-function getCSRFToken() {
-    return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+export function getCSRFToken() {
+    return document.querySelector('meta[name= "csrf-token"]').getAttribute('content')
 }
 
 function renderErrors(errors) {
@@ -22,16 +22,40 @@ document.getElementById('add-link').addEventListener('click', function() {
     document.getElementById('links-list').appendChild(input);
 });
 
-document.getElementById('post-create-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const form = e.target;
+// ТЕГИ
+
+const tags = document.querySelectorAll('#id_tags label')
+const textContainer = document.getElementById('id_content')
+
+for (let i = 0; i < tags.length; i++) {
+    let inputTag = tags[i].childNodes[0]
+    let textTag = tags[i].childNodes[1].textContent.trim()
+    
+    inputTag.addEventListener('change', function() {
+        if (inputTag.checked) {
+            textContainer.value += textTag
+            
+        } else {
+            textContainer.value = textContainer.value.replace(textTag, "")
+        }
+
+    })
+    
+}
+
+
+
+document.getElementById('post-create-form').addEventListener(
+    'submit',
+    function (event) {
+    event.preventDefault();
+    const form = event.target;
     const formData = new FormData(form);
     fetch(form.action, {
         method: 'POST',
         headers: {
-            'X-CSRFToken': getCSRFToken,
+            'X-CSRFToken': getCSRFToken(),
             'X-Requested-With': 'XMLHttpRequest',
-
         },
         body: formData
     })
@@ -43,8 +67,11 @@ document.getElementById('post-create-form').addEventListener('submit', function 
             return data;
         }) 
         .then((data) => {
-            if (data.redirect_url) {
-                window.location.href = data.redirect_url;
+            // if (data.redirect_url) {
+            //     window.location.href = data.redirect_url;
+            // }
+            if (data.success) {
+                window.location.reload()
             }
         })
         .catch((data) => {

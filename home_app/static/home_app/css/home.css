@@ -48,3 +48,10 @@
     color: #81818D;
     
 }
+
+.post-loader {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    bottom: 70px;
+}

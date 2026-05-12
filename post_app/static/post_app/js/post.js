@@ -22,6 +22,8 @@ crossButton.addEventListener(
     'click',
     function() {
         document.getElementById('modal-background').style = 'display: none;'
+
+        document.getElementById('publication-text-input').value = document.getElementById('id_content').value
     }
 )
 
@@ -32,9 +34,6 @@ document.getElementById('publication-text-input').addEventListener(
     'input',
     function() {
         document.getElementById('id_content').value = document.getElementById('publication-text-input').value
-
-        console.log(document.getElementById('id_content').value)
-        console.log(document.getElementById('publication-text-input').value)
     }
 )
 

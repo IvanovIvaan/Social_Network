@@ -9,13 +9,15 @@ class Post(models.Model):
         on_delete= models.CASCADE,
         related_name= "posts"
     )
-
     title = models.CharField(max_length= 150)
     topic = models.CharField(max_length= 150, blank= True, null= True)
     content = models.TextField()
     tags = models.ManyToManyField("Tag", related_name= "posts", blank= True)
     created_at = models.DateTimeField(auto_now_add= True)
     updated_at = models.DateTimeField(auto_now= True)
+    
+    class Meta:
+        ordering = ["-created_at"]
 
     def __str__(self):
         return f"{self.author.username}: {self.title}"
@@ -35,7 +37,7 @@ class PostLinks(models.Model):
     url = models.URLField(max_length= 500)
 
     def __str__(self):
-        return f"Link: {self.url}"
+        return f"{self.url}"
     
 class PostImage(models.Model):
     post = models.ForeignKey(

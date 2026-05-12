@@ -15,6 +15,7 @@ body {
     align-items: center;
 
     background-color: #FAF8FF;
+    overflow: hidden;
 }
 
 
@@ -30,6 +31,21 @@ p {
     text-decoration: line-through !important;
 }
 
+*::-webkit-scrollbar {
+    width: 0.5vw;
+    height: 90%;
+}
+*::-webkit-scrollbar-track {
+    background: #E9E5EE;
+    border-radius: 5px;
+    height: 90%;
+    cursor: pointer;
+}
+*::-webkit-scrollbar-thumb {
+    background: #543C52;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 
 
@@ -101,11 +117,14 @@ header {
 
 
 .content {
-    margin-top: 7vh;
-    max-width: 1440px;
     display: flex;
-    width: 100vw;
     flex-direction: row;
+    /* justify-content: space-between; */
+
+    margin-top: 7vh;
+    width: 100vw;
+    max-width: 1440px;
+    
 
     padding-top: 2vh;
     gap: 1vw;
@@ -138,11 +157,20 @@ header {
 }
 
 .profile-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 8.88vh;
+    width: 8.88vh;
+    border-radius: 1234px;
+    overflow: hidden;
 }
 
+
 .profile-image img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .nickname {
@@ -187,6 +215,14 @@ header {
 }
 
 .right-container {
-    width: 64.1vw;
+    display: flex;
+    flex-direction: column;
+
+    height: 90vh;
     
+    gap: 1vh;
+    overflow-y: auto;
+}
+.right-container::-webkit-scrollbar {
+    display: none;
 }

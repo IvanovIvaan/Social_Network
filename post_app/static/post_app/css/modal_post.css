@@ -30,22 +30,6 @@
     z-index: 20;
 }
 
-*::-webkit-scrollbar {
-    width: 0.5vw;
-    height: 10vh;
-}
-*::-webkit-scrollbar-track {
-    background: #E9E5EE;
-    border-radius: 5px;
-    height: 10vh;
-    cursor: pointer;
-}
-*::-webkit-scrollbar-thumb {
-    background: #543C52;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 
 .modal-title {
     font-size: 2rem;
@@ -121,7 +105,9 @@
     background-color: #E9E5EE;
     border-radius: 6px;
     color: #543C52;
+
     cursor: pointer;
+    user-select: none;
 }
 
 .block-tags input {

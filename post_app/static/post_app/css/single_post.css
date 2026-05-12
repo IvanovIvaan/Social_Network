@@ -1,0 +1,114 @@
+.post {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex-wrap: wrap;
+
+    width: 100%;
+    gap: 1.7vh;
+
+    background-color: white;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding: 2.1vh 1.4vw;
+    border-bottom: 1px solid #CDCED2;
+}
+
+.post-author {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 0.7vw;
+}
+
+.author-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4.8vh;
+    width: 4.8vh;
+    border-radius: 1234px;
+    overflow: hidden;
+}
+
+.post-author img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.post-author h2 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.three-dotes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.three-dotes button {
+    all: unset;
+    cursor: pointer;
+}
+.three-dotes button:hover {
+    color: #543C52;
+}
+
+.post-title {
+    padding: 1vh 0;
+    font-weight: 500;
+}
+
+.post-content {
+    display: flex;
+    flex-direction: column;
+    
+    padding: 0vh 1.4vw 2.1vh;
+    max-width: 55vw;
+}
+.post-content p {
+    overflow-wrap: break-word;
+    width: 100%;
+}
+
+
+
+.post-links {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 1vh;
+    gap: 0.3vh;
+}
+
+.post-links a {
+    color: #691361;
+}
+
+.post-images {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+    gap: 1vw;
+    padding: 0vh 1.4vw 2.1vh;
+}
+
+.post-images img {
+    height: 35vh;
+    width: auto;
+    display: block;
+    object-fit: contain;
+
+    border-radius: 16px;
+}

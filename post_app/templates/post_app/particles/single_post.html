@@ -1,0 +1,42 @@
+{% load static %}
+
+<article class="post" id= "post-{{ post.id }}">
+    <div class="post-header">
+        <div class="post-author">
+            <div class="author-avatar">
+                {% if post.author.avatar %}
+                    <img src= "{{ post.author.avatar.url }}">
+                {% endif %}
+                {% if not post.author.avatar %}
+                    <img src="{% static 'images/profile/linali.png' %}">
+                {% endif %}
+            </div>
+            <h2>{{ post.author.nickname }}</h2>
+        </div>
+        <div class= "three-dotes">
+            {% if post.author == request.user and request.path == '/post/' %}
+                <button type= "button" class= "delete-post" data-post-id= "{{ post.id }}" data-url="{% url 'post_delete' post.id %}">
+                    Видалити
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="post-content">
+        <div class="post-title">
+            <p>{{ post.title }}</p>
+        </div>
+        <p>{{ post.topic }}</p>
+        <p>{{ post.content }}</p>
+        <div class= "post-links">
+            {% for link in post.links.all %}
+                <a href= "{{ link }}">{{ link }}</a>
+            {% endfor %}
+        </div>
+
+    </div>
+    <div class="post-images">
+        {% for image in post.images.all %}
+            <img src="{{ image.compressed_image.url }}">
+        {% endfor %}
+    </div>
+</article>

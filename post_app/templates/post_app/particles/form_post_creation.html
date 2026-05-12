@@ -9,7 +9,7 @@
 
         <div id="post-errors"></div>
     
-        <form class= "post-form" id="post-create-form" method="post" action="{% url 'post_create' %}">
+        <form class= "post-form" id="post-create-form" method="post" action="{% url 'post_create' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
         

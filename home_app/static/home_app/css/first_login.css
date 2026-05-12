@@ -1,0 +1,102 @@
+.first-login {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+.first-login-window {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 1.6vw 3vw 3vw 3vw;
+    gap: 7vh;
+    border-radius: 20px;
+    z-index: 20;
+}
+.first-login h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top: 1vh;
+    padding: 0 3vw;
+}
+
+.first-login form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2vh;
+    width: 100%;
+}
+
+.first-login p {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7vh;
+    width: 100%;
+}
+
+.first-login input {
+    border: 1px solid #81818D;
+    border-radius: 10px;
+    padding: 0.7vw 1.1vw;
+    width: 100%;
+}
+
+.profile-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    width: 100%;
+    height: 5vh;
+}
+
+.avatar-field {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5vh 1vw;
+    border: 1px solid #543C52;
+    border-radius: 1234px;
+    color: #543C52;
+    
+}
+.avatar-field input {
+    display: none;
+}
+
+.profile-button button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1.5vh 1vw;
+    background-color: #543C52;
+    color: white;
+    border: none;
+    border-radius: 1234px;
+}
+
+.profile-button p {
+    font-size: 0.8rem;
+}

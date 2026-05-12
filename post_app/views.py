@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView, FormView
 from django.views import View
 from django.http import HttpRequest, JsonResponse
@@ -6,17 +6,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
+from django.db import transaction
 
 from .forms import PostCreationForm, MultipleFileField, MultipleFileInput
 from .models import Post
-
-# Create your views here.
-# def render_post(request):
-#     return render(
-#         request= request,
-#         template_name= 'post.html'
-#         )
-
 
 
 
@@ -26,11 +19,14 @@ class PostListView(ListView):
     context_object_name = 'posts'
     paginate_by = 5
     template_name = 'post_app/post.html'
-    
+
+    def get_queryset(self):
+        return Post.objects.filter(author = self.request.user).prefetch_related('images').order_by("-created_at", "-updated_at")
     
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         context['form_post_creation'] = PostCreationForm()
+        # context['posts'] = Post.objects.filter(author_id = self.request.user)[:self.paginate_by]
         return context
     
     def get(self, request, *args, **kwargs):
@@ -43,18 +39,18 @@ class PostListView(ListView):
                 return JsonResponse({'success': False})
             return JsonResponse({
                 'success': True,
-                'html': render_to_string(self.template_name, {'posts': page_object.object_list})
+                'html': render_to_string("post_app/particles/list_post.html", {
+                    'posts': page_object.object_list,
+                    'form_post_creation': PostCreationForm()
+                },
+                request= request
+                )
             })
         return super().get(request, *args, **kwargs)
 
     
-    
-# class PostCreationView(View):
-#     def post(self, request: HttpRequest, *args, **kwargs):
-#         form = PostCreationForm(request.POST)
-        
-class PostCreationView(LoginRequiredMixin, FormView):
 
+class PostCreationView(LoginRequiredMixin, FormView):
     template_name = "post_app/form_post_creation.html"
     form_class = PostCreationForm
     success_url = reverse_lazy("post_list")
@@ -65,22 +61,45 @@ class PostCreationView(LoginRequiredMixin, FormView):
 
         if self.request.method == "POST":
             kwargs["links"] = self.request.POST.getlist("links")
-            kwargs["photos"] = self.request.FILES.getlist("photos")
+            kwargs["images"] = self.request.FILES.getlist("images")
 
         return kwargs
 
     def form_valid(self, form):
-        post = form.save(author=self.request.user)
+        try:
+            with transaction.atomic():
+                post = form.save(author=self.request.user)
 
-        return JsonResponse({
-            "success": True,
-            "message": "Публікацію створено успішно",
-            "redirect_url": str(self.success_url),
-            "post_id": post.id,
-        })
+            return JsonResponse({
+                "success": True,
+                "redirect_url": str(self.success_url),
+                "post_id": post.id
+            })
+
+        except Exception as e:
+            return JsonResponse({
+                "success": False,
+                "errors": {
+                    "server": [{"message": str(e)}]
+                }
+            }, status=400)
 
     def form_invalid(self, form):
         return JsonResponse({
             "success": False,
-            "errors": form.errors.get_json_data(),
+            "errors": form.errors.get_json_data()
         }, status=400)
+    
+class PostDeleteView(LoginRequiredMixin, View):
+    def post(self, request, post_id):
+        post = get_object_or_404(
+            Post,
+            id= post_id,
+            author= request.user
+        )
+
+        post.delete()
+
+        return JsonResponse({
+            "success": True
+        })

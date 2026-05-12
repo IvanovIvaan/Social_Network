@@ -1,7 +1,10 @@
 from django.urls import path
-from .views import HomeTemplateView, SetNicknameView
+from .views import SetProfileView, AllPostListView
+from post_app.views import PostCreationView, PostDeleteView
 
 urlpatterns = [
-    path(route= '', view= HomeTemplateView.as_view(), name= 'home'),
-    path(route= 'setup/', view= SetNicknameView.as_view(), name= 'setnickname'),
+    path(route= '', view= AllPostListView.as_view(), name= 'home'),
+    path(route= 'setprofile/', view= SetProfileView.as_view(), name= 'setprofile'),
+    path(route= 'create/', view= PostCreationView.as_view(), name= 'post_create'),
+    path(route= "post/post-<int:post_id>/delete/", view= PostDeleteView.as_view(), name="post_delete"),
 ]

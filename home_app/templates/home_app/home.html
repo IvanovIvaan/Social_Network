@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block meta %}
+    <meta name= "csrf-token" content= "{{ csrf_token }}">
+{% endblock %}
+
 
 {% block title %}
     Головна
@@ -10,6 +14,8 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'home_app/css/first_login.css' %}">
+    <link rel="stylesheet" href="{% static 'post_app/css/single_post.css' %}">
 {% endblock %}
 
 
@@ -73,17 +79,15 @@
 
 
 {% block content %}
+    {% include 'home_app/particles/form_first_login.html' %}
 
-    <!-- First login -->
-    <div class= "modal-panel-container">
-        <div class="modal-panel">
-            <h1>Додай деталі про себе</h1>
-            <form method="post" action="{% url 'setnickname' %}">
-                {{ form_setnickname.as_p }}
+    {% include 'post_app/particles/form_post_content.html' %}
 
-            </form>
-        </div>
+    <div class= "post-list">
+        {% include 'post_app/particles/list_post.html' %}
+        <div class= "post-loader" id= "post-loader-line"></div>
     </div>
+    
     
 {% endblock %}
 
@@ -94,5 +98,10 @@
 
 {% block scripts %}
     <script type="module" src="{% static 'home_app/js/home.js' %}"></script>
+    <script type="module" src="{% static 'home_app/js/firstLogin.js' %}"></script>
+    <script type="module" src="{% static 'post_app/js/postCreation.js' %}"></script>
+    <script type="module" src="{% static 'post_app/js/deletePost.js' %}"></script>
+    <script type="module" src="{% static 'post_app/js/PostList.js' %}"></script>
+    
 {% endblock %}
 

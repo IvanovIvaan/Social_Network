@@ -56,7 +56,7 @@ class PostCreationForm(forms.ModelForm):
             'topic': forms.TextInput(attrs={'placeholder': 'Тема публікації'}),
             'content': forms.Textarea(attrs={'class': 'content-input', 'rows': 5, 'placeholder': 'Текст публікації'}),
         }
-    def __init__(self, *args, links = None, images = [], **kwargs):
+    def __init__(self, *args, links = None, images = None, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['tags'].queryset = Tag.objects.all()
         self.links_list = []
@@ -106,7 +106,8 @@ class PostCreationForm(forms.ModelForm):
                 PostImage.objects.create(
                     post = post,
                     original_image = image,
-                    compressed_image = f'_compressed_image{image}'
+                    # compressed_image = f'_compressed_image{image}'
+                    compressed_image = self._compressed_image(image)
                 )
         return post
     def _compressed_image(self, image):
