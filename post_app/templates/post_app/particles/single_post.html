@@ -8,10 +8,15 @@
                     <img src= "{{ post.author.avatar.url }}">
                 {% endif %}
                 {% if not post.author.avatar %}
-                    <img src="{% static 'images/profile/linali.png' %}">
+                    <img src="{% static 'images/profile/none_avatar.jpg' %}">
                 {% endif %}
             </div>
-            <h2>{{ post.author.nickname }}</h2>
+            {% if post.author.nickname %}
+                <h2>{{ post.author.nickname }}</h2>
+            {% endif %}
+            {% if not post.author.nickname %}
+                <h2>{{ post.author.email }}</h2>
+            {% endif %}
         </div>
         <div class= "three-dotes">
             {% if post.author == request.user and request.path == '/post/' %}
@@ -23,20 +28,32 @@
     </div>
     <div class="post-content">
         <div class="post-title">
-            <p>{{ post.title }}</p>
+            {% if post.title %}
+                <p>{{ post.title }}</p>
+            {% endif %}
         </div>
-        <p>{{ post.topic }}</p>
-        <p>{{ post.content }}</p>
+        {% if post.topic %}
+            <p>{{ post.topic }}</p>
+        {% endif %}
+        {% if post.content %}
+            <div class= "post-text">
+                <p>{{ post.content }}</p>
+            </div>
+        {% endif %}
         <div class= "post-links">
-            {% for link in post.links.all %}
-                <a href= "{{ link }}">{{ link }}</a>
-            {% endfor %}
+            {% if post.links.all %}
+                {% for link in post.links.all %}
+                    <a href= "{{ link }}">{{ link }}</a>
+                {% endfor %}
+            {% endif %}
         </div>
 
     </div>
     <div class="post-images">
-        {% for image in post.images.all %}
-            <img src="{{ image.compressed_image.url }}">
-        {% endfor %}
+        {% if post.images.all %}
+            {% for image in post.images.all %}
+                <img src="{{ image.compressed_image.url }}">
+            {% endfor %}
+        {% endif %}
     </div>
 </article>

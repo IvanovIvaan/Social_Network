@@ -27,6 +27,13 @@ crossButton.addEventListener(
     }
 )
 
+document.getElementById('button_tag_cancel').addEventListener(
+    'click',
+    function() {
+        document.getElementById('modal-tag-background').style = "display: none;"
+    }
+)
+
 
 
 
@@ -38,4 +45,13 @@ document.getElementById('publication-text-input').addEventListener(
 )
 
 
+
+// const content = document.querySelector('.post-text p').textContent;
+
+// const formattedContent = content.replace(
+//     "/#[\wа-яіїєґА-ЯІЇЄҐ]+/g",
+//     match => `<a href= ''>${match}</a>`
+// );
+
+// document.querySelector('.post-text p').innerHTML = formattedContent;
 

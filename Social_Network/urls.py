@@ -24,8 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(route= '', view= include('user_app.urls')),
     path(route= 'home/', view=include('home_app.urls')),
-    path(route= 'friends/', view= include('friends_app.urls')),
     path(route= 'post/', view= include('post_app.urls')),
+    path(route= 'chat/', view= include('chat_app.urls')),
 ]
 
 urlpatterns += static(

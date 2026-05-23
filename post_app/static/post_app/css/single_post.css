@@ -81,6 +81,10 @@
     width: 100%;
 }
 
+.post-text p {
+    white-space: pre-wrap;
+}
+
 
 
 .post-links {
@@ -95,11 +99,24 @@
     color: #691361;
 }
 
+/* .gallery-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.gallery-row img {
+    display: block;
+    object-fit: cover;
+    border-radius: 16px;
+} */
+
+
 .post-images {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-
+    /* width: 100%; */
     gap: 1vw;
     padding: 0vh 1.4vw 2.1vh;
 }

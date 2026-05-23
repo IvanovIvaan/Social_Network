@@ -20,28 +20,94 @@ document.getElementById('add-link').addEventListener('click', function() {
     input.placeholder = 'https://example.com';
     document.getElementById('links-list').appendChild(document.createElement('br'));
     document.getElementById('links-list').appendChild(input);
+
+    // document.getElementById('links-list').scrollTo = 0;
+
+    document.getElementById('links-list').scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
 });
 
 // ТЕГИ
-
 const tags = document.querySelectorAll('#id_tags label')
 const textContainer = document.getElementById('id_content')
 
 for (let i = 0; i < tags.length; i++) {
+    let divTag = tags[i]
     let inputTag = tags[i].childNodes[0]
     let textTag = tags[i].childNodes[1].textContent.trim()
     
     inputTag.addEventListener('change', function() {
+
         if (inputTag.checked) {
-            textContainer.value += textTag
+            divTag.style = `
+                background-color: #543C52;
+                color: #E9E5EE;
+            `
+            if (textContainer.value) {
+                if (/#[\wа-яіїєґА-ЯІЇЄҐ]+/g.test(textContainer.value)) {
+                    textContainer.value += `${textTag}`
+                } else {
+                    textContainer.value += `\n${textTag}`
+                }
+            } else {
+                textContainer.value += `${textTag}`
+            }
             
         } else {
-            textContainer.value = textContainer.value.replace(textTag, "")
+            textContainer.value = textContainer.value.replace(`${textTag}`, "")
+
+            if (/#[\wа-яіїєґА-ЯІЇЄҐ]+/g.test(textContainer.value) == false) {
+                textContainer.value = textContainer.value.replace(`\n`, "")
+            }
+            // if (textContainer.value) {
+            //     textContainer.value = textContainer.value.replace(`${textTag}`, "")
+            // } else if (textContainer.value == `${textTag}`) {
+            //     textContainer.value = textContainer.value.replace(`\n${textTag}`, "")
+            // }
+            divTag.style = `
+                background-color: #E9E5EE;
+                color: #543C52;
+            `
         }
 
     })
     
 }
+
+// const textarea = document.getElementById('id_content')
+
+// document.addEventListener('change', function (event) {
+
+//     if (event.target.name === 'tags') {
+
+//         const checkedTags = document.querySelectorAll(
+//             'input[name="tags"]:checked'
+//         )
+
+//         const tagsText = [...checkedTags].map(tag => `#${tag.parentElement.textContent.trim().replace('#', '')}`).join(' ')
+
+//         let mainText = textarea.value.replace(/\n\n#.*$/s, '').trim();
+
+//         textarea.value = `${mainText}\n${tagsText}`
+//     }
+// });
+
+const tagsContainer = document.getElementById('id_tags')
+const addTagButton = document.createElement('button')
+addTagButton.setAttribute('id', 'add_tag')
+addTagButton.setAttribute('class', 'add-button')
+addTagButton.setAttribute('type', 'button')
+addTagButton.textContent = '+'
+tagsContainer.appendChild(addTagButton)
+
+addTagButton.addEventListener(
+    'click',
+    function() {
+        document.getElementById('modal-tag-background').style = 'display: flex;'
+    }
+)
 
 
 

@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'post_app',
     'home_app',
-    'friends_app',
     'user_app',
+    'chat_app'
 ]
 
 MIDDLEWARE = [
@@ -64,6 +64,7 @@ TEMPLATES = [
             BASE_DIR / 'home_app' / 'templates' / 'home_app',
             BASE_DIR / 'user_app' / 'templates' / 'user_app',
             BASE_DIR / 'post_app' / 'templates' / 'post_app',
+            BASE_DIR / 'chat_app' / 'templates' / 'chat_app',
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -101,6 +102,9 @@ DATABASES = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Gmail
 
@@ -157,7 +161,8 @@ STATICFILES_DIRS =  [
     BASE_DIR / 'friends_app' / 'static' / 'friends_app',
     BASE_DIR / 'home_app' / 'static' / 'home_app',
     BASE_DIR / 'user_app' / 'static' / 'user_app',
-    BASE_DIR / 'post_app' / 'static' / 'post_app'
+    BASE_DIR / 'post_app' / 'static' / 'post_app',
+    BASE_DIR / 'chat_app' / 'static' / 'chat_app',
     ]
 
 

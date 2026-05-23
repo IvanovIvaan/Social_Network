@@ -135,3 +135,24 @@ class PostCreationForm(forms.ModelForm):
         image.seek(0)
         compressed_image = f'compressed_{image.name.rsplit(".", 1)[0]}.jpg'
         return ContentFile(buffer.getvalue(), name = compressed_image)
+    
+class TagCreationForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ('name',)
+        labels = {'name': 'Назва',}
+        widgets = {
+            'name': forms.TextInput(attrs= {
+                'placeholder': '#',
+            })
+        }
+    
+    def clean_name(self):
+        name = self.cleaned_data['name'].lower().strip()
+
+        if Tag.objects.filter(name= name).exists():
+            raise forms.ValidationError(
+                'Цей тег вже існує.'
+            )
+
+        return name

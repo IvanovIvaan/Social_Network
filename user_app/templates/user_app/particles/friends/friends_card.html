@@ -1,0 +1,40 @@
+{% load static %}
+
+{% for person in users %}
+
+    <article class= "person-container" data-person-id="{{ person.id }}">
+        <div class= "profile-image">
+            {% if person.avatar %}
+                <img src= "{{ person.avatar.url }}">
+                
+            {% endif %}
+            {% if not person.avatar %}
+                <img src="{% static 'images/profile/none_avatar.jpg' %}">
+            {% endif %}
+        </div>
+        <h3>{% firstof person.nickname person.username %}</h3>
+        <p>{{ person.username }}</p>
+
+        <div class= "person-buttons">
+            {% if section == "requests" %}
+                <button class= "full-button" type="button" data-friend-action data-url= "{% url 'friend_action' person.id 'accept' %}">Підтвердити</button>
+                <button class= "empty-button" type="button" data-friend-action data-url= "{% url 'friend_action' person.id 'delete' %}">Відхилити</button>
+
+            {% elif section == "recommendations" %}
+                <button class= "full-button" type="button" data-friend-action data-url= "{% url 'friend_action' person.id 'add' %}">Додати</button>
+                <button class= "empty-button" type="button" data-friend-action data-url= "{% url 'friend_action' person.id 'dismiss' %}">Видалити</button>
+
+            {% else %}
+                <button class= "full-button" type="button">Повідомлення</button>
+                <button class= "empty-button" type="button" data-friend-action data-url= "{% url 'friend_action' person.id 'delete' %}">Видалити</button>
+            {% endif %}
+        </div>
+        
+    </article>
+
+{% empty %}
+    <div class= "empty-title">
+        <p>Порожньо</p>
+    </div>
+{% endfor %}
+

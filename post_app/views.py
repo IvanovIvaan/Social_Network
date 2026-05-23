@@ -7,14 +7,17 @@ from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.db import transaction
+import os
+from django.conf import settings
+from django.db import models
 
-from .forms import PostCreationForm, MultipleFileField, MultipleFileInput
+from .forms import PostCreationForm, MultipleFileField, MultipleFileInput, TagCreationForm
 from .models import Post
 
 
 
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     context_object_name = 'posts'
     paginate_by = 5
@@ -26,6 +29,7 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         context['form_post_creation'] = PostCreationForm()
+        context['form_tag_creation'] = TagCreationForm()
         # context['posts'] = Post.objects.filter(author_id = self.request.user)[:self.paginate_by]
         return context
     
@@ -88,7 +92,7 @@ class PostCreationView(LoginRequiredMixin, FormView):
         return JsonResponse({
             "success": False,
             "errors": form.errors.get_json_data()
-        }, status=400)
+        }, status= 400)
     
 class PostDeleteView(LoginRequiredMixin, View):
     def post(self, request, post_id):
@@ -103,3 +107,55 @@ class PostDeleteView(LoginRequiredMixin, View):
         return JsonResponse({
             "success": True
         })
+    
+    
+class TagCreationView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        form = TagCreationForm()
+        return render(request, "form_post_creation.html", {
+            "form_tag_creation": form
+        })
+    
+    def post(self, request):
+        form = TagCreationForm(request.POST)
+
+        if form.is_valid():
+            tag = form.save()
+
+            return JsonResponse({
+                "success": True,
+                "tag": {
+                    "id": tag.id,
+                    "name": tag.name
+                }
+            })
+        # return JsonResponse({
+        #     "success": False,
+        #     "errors": form.errors.get_json_data()
+        # }, status = 400)
+        return JsonResponse({
+            "success": False,
+            'errors': {
+                'message': 'Тег вже існує'
+            }
+        }, status= 400)
+    
+class ImageDeleteView(LoginRequiredMixin, View):
+    def delete_image(request, file_name):
+        file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            return JsonResponse(
+                {
+                    'success': True,
+                }
+            )
+        return JsonResponse(
+            {
+                'success': False,
+                'errors': {
+                    'message': 'Картинка вже видалена'
+            }
+            }
+        )

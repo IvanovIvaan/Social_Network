@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Чати
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'chat_app/css/chat.css' %}">
+{% endblock %}
+
+{% block profile_block %}
+    <div class= "side-panel-content">
+        <button class="create-group">
+            <img src="" alt="">
+            Створити груповий чат
+        </button>
+        <div class= "container contact-list-container"></div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class= "chat-content">
+        <div class="container chat-container"></div>
+        <div class="right-chat-containers">
+            <div class="container chat-list"></div>
+            <div class="container chat-list"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    
+{% endblock %}

@@ -15,6 +15,8 @@
 }
 
 
+
+
 .modal-background.open {
     display: flex;
 }
@@ -113,10 +115,10 @@
 .block-tags input {
     display: none;
 }
-.block-tags label:has(.tags:checked) {
+/* .block-tags label:has(.tags:checked) {
     background-color: #543C52;
     color: #E9E5EE;
-}
+} */
 
 
 .tags {
@@ -133,6 +135,26 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.add-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center !important;
+    align-items: center;
+
+    width: 2.7vh;
+    height: 2.7vh;
+
+    border: 1px solid #543C52;
+    border-radius: 1234px;
+    color: #543C52;
+    font-size: 1.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    user-select: none;
+    background-color: white;
+    
 }
 
 
@@ -180,10 +202,12 @@ textarea::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
     align-items: start;
-
+    flex-flow: column-reverse;
+    
+    padding: 1vh 0 0;
     width: 23.8vw;
     max-height: 11vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .links-list::-webkit-scrollbar {
@@ -203,7 +227,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .links-list input {
-    width: 20vw;;
+    width: 20vw;
 }
 
 .first-link-container {
@@ -212,34 +236,6 @@ textarea::-webkit-scrollbar-thumb {
     align-items: center;
     gap: 1vw;
 }
-
-.first-link-container button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    width: 1.5vw;
-    height: 1.5vw;
-
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: #543C52;
-    
-    border-radius: 1234px;
-
-    background-color: white;
-    border: 1px, solid #543C52;
-
-    cursor: pointer;
-    z-index: 30;
-}
-
-
-
-
-
-
 
 
 /* Нижні кнопки */
@@ -278,6 +274,13 @@ input[type="file"]::file-selector-button {
     display: none;
 }
 
+.bottom-buttons button {
+    position: relative;
+}
+.bottom-buttons button input {
+    position: absolute;
+}
+
 
 /* КАРТИНКИ */
 .preview-images {
@@ -287,14 +290,24 @@ input[type="file"]::file-selector-button {
 
     gap: 1vw;
 
-    overflow-x: scroll;
+    overflow-x: auto;
     border-radius: 10px;
+}
+
+.container-image {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 25vh;
+    width: fit-content;
 }
 
 .preview-image {
     height: 25vh;
     width: auto;
-
     border-radius: 10px;
 }
 
@@ -308,3 +321,125 @@ input[type="file"]::file-selector-button {
     height: 10vh;
     cursor: pointer;
 }
+
+.delete-image {
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 2vw;
+    height: 2vw;
+
+    background-color: white;
+    border: 1px solid #543C52;
+    border-radius: 1234px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.delete-image:hover {
+    background-color: rgb(224, 222, 224);
+}
+.delete-image img {
+    height: 1.7vh;
+}
+
+/* ДОДАВАННЯ ТЕГІВ */
+
+
+.modal-tag-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 50;
+    
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.modal-tag-window {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: relative;
+    background: white;
+    padding: 1.6vw 1.6vw;
+    border-radius: 20px;
+    width: 25vw;
+    z-index: 60;
+    gap: 3vh;
+}
+
+.tag-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 1.5vh;
+    width: 100%;
+}
+
+.container-tag-button {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5vw;
+    align-items: center;
+    justify-content: end;
+
+    width: 100%;
+}
+.button-tag-cancel {
+    padding: 0.7vw 1.1vw;
+    background-color: white;
+    border: 1px solid #543C52;
+    border-radius: 1234px;
+    color: #543C52;
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.container-tag-button button {
+    padding: 0.7vw 1.1vw;
+    background-color: #543C52;
+    border: none;
+    border-radius: 1234px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+}
+.modal-tag-background h1 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.tag-input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 0.7vh;
+
+    width: 100%;
+}
+
+.tag-input-container input {
+    border: 1px solid #81818D;
+    border-radius: 10px;
+    padding: 0.7vw 1.1vw;
+    height: 4.3vh;
+    font-size: 1.1rem;
+}
+
+

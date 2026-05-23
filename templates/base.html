@@ -38,9 +38,9 @@
                             <p>Друзі</p>
                         </a>
 
-                        <a>
+                        <a href="{% url 'chat' %}">
                             <img class= "icon" src="{% static 'images/header_logo/chat.png' %}">
-                            <p class="not-available">Чати</p>
+                            <p>Чати</p>
                         </a>
                     
                         <a href="{% url 'settings' %}">
@@ -77,7 +77,7 @@
                                         
                                     {% endif %}
                                     {% if not request.user.avatar %}
-                                        <img src="{% static 'images/profile/linali.png' %}">
+                                        <img src="{% static 'images/profile/none_avatar.jpg' %}">
                                     {% endif %}
                                 </div>
                                 <h1 class="nickname">{{ request.user.nickname }}</h1>

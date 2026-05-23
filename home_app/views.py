@@ -4,9 +4,10 @@ from django.views import View
 from django.http import JsonResponse, HttpRequest
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import ProfileForm
-from post_app.forms import PostCreationForm
+from post_app.forms import PostCreationForm, TagCreationForm
 from post_app.models import Post
 
 # Create your views here.
@@ -26,7 +27,7 @@ from post_app.models import Post
 #         # context['posts'] = Post.objects.all()
 #         return context
     
-class AllPostListView(ListView):
+class AllPostListView(LoginRequiredMixin, ListView):
     model = Post
     context_object_name = 'posts'
     paginate_by = 5
@@ -35,6 +36,7 @@ class AllPostListView(ListView):
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         context['form_post_creation'] = PostCreationForm()
+        context['form_tag_creation'] = TagCreationForm()
         if(self.request.user.is_authenticated and not self.request.user.profile_completed):
             context['form_profile'] = ProfileForm()
         return context
@@ -58,7 +60,7 @@ class AllPostListView(ListView):
             })
         return super().get(request, *args, **kwargs)
 
-class SetProfileView(View):
+class SetProfileView(LoginRequiredMixin, View):
     def post(self, request: HttpRequest, *args, **kwargs):
         if request.user.profile_completed:
             return JsonResponse({

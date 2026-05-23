@@ -1,0 +1,83 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    background-color: white;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+}
+
+.side-panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.create-group {
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #543C52;
+    color: white;
+    border-radius: 1234px;
+    width: 100%;
+    height: 4vh;
+    
+    cursor: pointer;
+    transition: 0.2s;
+}
+.create-group:hover {
+    background-color: #462f44;
+}
+
+.contact-list-container {
+    height: 82vh;
+    
+}
+
+.chat-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    gap: 0.7vw;
+
+    height: 87vh;
+    
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+
+    height: 100%;
+}
+
+.right-chat-containers {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 1vh;
+
+    width: 20vw;
+    height: 100%;
+}
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    flex: 1;
+
+    width: 100%;
+}

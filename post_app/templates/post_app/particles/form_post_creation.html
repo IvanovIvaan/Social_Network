@@ -1,5 +1,25 @@
 {% load static %}
 
+<div id="modal-tag-background" class="modal-tag-background">
+    <div class="modal-tag-window">
+        <h1>#Додати хештег</h1>
+        <form class="tag-form" id="tag-create-form" method="post" action="{% url 'tag_create' %}">
+            {% csrf_token %}
+            <div class= "tag-input-container">
+                {{ form_tag_creation.name.label }}
+                {{ form_tag_creation.name }}
+                
+            </div>
+            <div class= "container-tag-button">
+                <div id = "button_tag_cancel" class="button-tag-cancel">Скасувати</div>
+                <button id="save_tag" type="submit">Зберегти</button>
+            </div>
+            <div id= "tag-errors"></div>
+        </form>
+    </div>
+</div>
+
+
 <div id="modal-background" class="modal-background">
     <div class="modal-window">
         <div class="close-container">
@@ -40,13 +60,15 @@
                     {{ form_post_creation.links }}
                     <div class= "first-link-container">
                         <input type="url" name="links" placeholder="https://example.com">
-                        <button type="button" id="add-link">+</button>
+                        <button class="add-button" type="button" id="add-link">+</button>
                     </div>
                     <!-- Сюди додаються посилання -->
                 </div>
             </div>
 
-            <div class="preview-images" id="preview-images"></div>
+            <div class="preview-images" id="preview-images">
+
+            </div>
 
             
 
@@ -69,7 +91,5 @@
 </div>
 
 {% block scripts %}
-    <script type="module" src="{% static 'post_app/js/post.js' %}"></script>
-    <script type="module" src="{% static 'post_app/js/postCreation.js' %}"></script>
-    <script type="module" src="{% static 'post_app/js/imagePreview.js' %}"></script>
+    
 {% endblock %}

@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 from django.conf import settings
 # Create your models here.
@@ -47,6 +49,15 @@ class PostImage(models.Model):
     )
     original_image = models.ImageField(upload_to= "post_app/original_image/")
     compressed_image = models.ImageField(upload_to= "post_app/compressed_image/")
+
+    # def delete(self, *args, **kwargs):
+
+    #     if self.original_image:
+    #         self.original_image.delete(save=False)
+    #     if self.compressed_image:
+    #         self.compressed_image.delete(save=False)
+
+    #     super().delete(*args, **kwargs)
 
     def __str__(self):
         return f"Image: {self.original_image}"
