@@ -8,6 +8,7 @@ viewAllSectionsButton.classList.add('active-section')
 viewAllSectionsButton.addEventListener(
     'click',
     function(){
+        // window.location.reload()
         buttonSections.forEach((btn) => {
             btn.classList.remove('active-section')
         })
@@ -63,6 +64,7 @@ buttonSections.forEach((button)=>{
     button.addEventListener(
         'click',
         function (){
+            // window.location.reload()
             buttonSections.forEach((btn) => {
                 btn.classList.remove('active-section')
                 viewAllSectionsButton.classList.remove('active-section')

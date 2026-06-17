@@ -1,0 +1,33 @@
+{% load static %}
+
+<div class="container chat-list">
+    <div class= "chats-label">
+        <div class= "chats-title">
+            <img src="{% static 'chat_app/images/Group.png' %}" alt="">
+            <h2>Групові чати</h2>
+        </div>
+        <!-- <button class="view-all-button" type="button">Дивитись всі</button> -->
+    </div>
+    <div id= 'group-list' class="chats-list">
+        {% for chat in group_chats %}
+        <button type="button" class="chat-group-button chat" data-chat-id="{{ chat.id }}" 
+            data-chat-title="{{ chat.name }}" 
+            data-user-count = "{{ chat.users.count }}" 
+            {% if chat.avatar %}
+                data-group-avatar = "{{ chat.avatar.url }}"
+            {% endif %}>
+                <div class="group-avatar">
+                    {% if chat.avatar %}
+                        <img src="{{ chat.avatar.url }}">
+                    {% else %}
+                        <h3>{{ chat.name|slice:":2"|upper }}</h3>
+                    {% endif %}
+                </div>
+                {{ chat.name|truncatechars:"30" }}
+            </button>
+        {% empty %}
+            <p id="groups-empty-text" class="empty-text">Порожньо</p>
+            <p id="groups-empty-text-2" class="empty-text-2">Ви поки не знаходитесь в жодній групі</p>
+        {% endfor %}
+    </div>
+</div>

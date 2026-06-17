@@ -9,6 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileForm
 from post_app.forms import PostCreationForm, TagCreationForm
 from post_app.models import Post
+from user_app.utils.friend_queries import get_users_by_section
+from utils.compressed_image import _compressed_image
 
 # Create your views here.
 # def render_home(request):
@@ -37,6 +39,16 @@ class AllPostListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['form_post_creation'] = PostCreationForm()
         context['form_tag_creation'] = TagCreationForm()
+        context['sections'] = {
+            'requests': {
+                'title': 'Запити', 
+                'users': get_users_by_section(user = self.request.user, section= 'requests')[:3]
+            },
+            'messages': {
+                'title': 'Повідомлення', 
+                'users': get_users_by_section(user = self.request.user, section= 'friends')[:3]
+            },
+        }
         if(self.request.user.is_authenticated and not self.request.user.profile_completed):
             context['form_profile'] = ProfileForm()
         return context
@@ -73,6 +85,9 @@ class SetProfileView(LoginRequiredMixin, View):
 
         if form.is_valid():
             user = form.save(commit= False)
+
+            if 'avatar' in request.FILES:
+                user.avatar = _compressed_image(request.FILES['avatar'])
 
             user.profile_completed = True
             user.save()

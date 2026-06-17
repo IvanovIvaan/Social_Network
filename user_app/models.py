@@ -9,16 +9,16 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     username = models.CharField(
         max_length= 150,
-        blank= True,
-        null= True,
+        blank= False,
+        null= False,
     )
     email = models.EmailField(
         unique= True
     )
     nickname = models.CharField(
         max_length = 30,
-        blank= True,
-        null= True,
+        blank= False,
+        null= False,
     )
 
     avatar = models.ImageField(

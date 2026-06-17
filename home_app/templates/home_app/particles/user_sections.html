@@ -1,0 +1,44 @@
+{% load static %}
+
+{% for key, section in sections.items %}
+    <div class= "profile-block">
+        <div class="block-top">
+            <div>
+                <img class="icon" src="{% static 'images/header_logo/friends.png' %}">
+                <p>{{ section.title }}</p>
+            </div>
+            <div>
+                <p><a href="">Дивитись всі</a></p>
+            </div>
+        </div>
+        <div class="contact-list requests">
+        {% for object in section.users %}
+            <div class="contact">
+                <div class="avatar">
+                    {% if object.avatar %}
+                        <img src= "{{ object.avatar.url }}">
+                    {% else %}
+                        <img src= "{% static 'images/profile/none_avatar.jpg' %}">
+                    {% endif %}
+                    
+                </div>
+                <div class="contact-text">
+                    <h3>{{ object.nickname }}</h3>
+                    {% if key == 'requests' %}
+                        <p>10.3k підписників</p>
+                    {% else %}
+                        <p>Привіт! Як справи?</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        {% empty %}
+            <div class= "empty-section">
+                <h2>Порожньо</h2>
+            </div>
+        
+        {% endfor %}
+        </div>
+
+    </div>
+{% endfor %}

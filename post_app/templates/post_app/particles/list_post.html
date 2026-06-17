@@ -1,10 +1,20 @@
 {% for post in posts %}
     {% include 'post_app/particles/single_post.html' %}
 {% empty %}
-    <div class= "no-post-container">
-        <div class= "empty-post-list">
-            <h2>У Вас поки немає публікацій</h2>
-            <h3>Створіть вашу першу публікацію, щоб оновити список</h3>
+    {% if request.path == '/post/' %}
+        <div class= "no-post-container">
+            <div class= "empty-post-list">
+                <h2>У Вас поки немає публікацій</h2>
+                <h3>Створіть вашу першу публікацію, щоб оновити список</h3>
+            </div>
         </div>
-    </div>
+    {% else %}
+        <div class= "no-post-container">
+            <div class= "empty-post-list">
+                <h4>У цього користувача поки немає публікацій</h4>
+                <p>Сталкеріть його сторінку, або можете побачити його оновлення на головній.</p>
+            </div>
+        </div>
+    {% endif %}
+    
 {% endfor %}

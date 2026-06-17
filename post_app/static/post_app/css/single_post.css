@@ -128,4 +128,9 @@
     object-fit: contain;
 
     border-radius: 16px;
+    /* transition: transform 0.2s ease; */
 }
+
+/* .post-images img:hover {
+    transform: scale(1.01);
+} */

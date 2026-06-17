@@ -1,3 +1,9 @@
+import os
+from dotenv import load_dotenv
+# from sshtunnel import SSHTunnelForwarder
+
+load_dotenv()
+
 """
 Django settings for Social_Network project.
 
@@ -31,6 +37,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'channels',
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,7 +68,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'templates',
-            BASE_DIR / 'friends_app' / 'templates' / 'friends_app',
             BASE_DIR / 'home_app' / 'templates' / 'home_app',
             BASE_DIR / 'user_app' / 'templates' / 'user_app',
             BASE_DIR / 'post_app' / 'templates' / 'post_app',
@@ -92,12 +99,49 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
+RUN_MAIN = os.environ.get('RUN_MAIN')
+
+# if RUN_MAIN == 'true':
+
+#     if os.getenv("SSH_LOGIN"):
+#         tunnel = SSHTunnelForwarder(
+#             ('ssh.pythonanywhere.com', 22),
+#             ssh_username=os.getenv("SSH_LOGIN"),
+#             ssh_password=os.getenv("SSH_PASSWORD"),
+#             remote_bind_address=(os.getenv("DB_HOST"), int(os.getenv("DB_PORT"))),
+#         )
+#         tunnel.start()
+#         port = str(tunnel.local_bind_port)
+#     else:
+#         port = os.getenv("REMOTE_DB_PORT")
+# else:
+#     port = os.getenv("REMOTE_DB_PORT")
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DB_NAME'),
+#         'USER': os.getenv('DB_USER'),
+#         'PASSWORD': os.getenv('DB_PASSWORD'),
+#         'HOST': '127.0.0.1',
+#         'PORT': port,
+#         'CONN_MAX_AGE': 600,
+#     }
+# }
+
+# print(os.getenv("DB_HOST"))
+# print(os.getenv("DB_PORT"))
+
+# print(os.getenv('DB_NAME'))
+# print(os.getenv('DB_USER'))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -158,7 +202,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS =  [
     BASE_DIR / 'static',
-    BASE_DIR / 'friends_app' / 'static' / 'friends_app',
     BASE_DIR / 'home_app' / 'static' / 'home_app',
     BASE_DIR / 'user_app' / 'static' / 'user_app',
     BASE_DIR / 'post_app' / 'static' / 'post_app',

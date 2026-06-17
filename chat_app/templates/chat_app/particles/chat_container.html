@@ -1,0 +1,30 @@
+{% load static %}
+
+<div class="container chat-container">
+    <div class="no-chat-opened-text">
+        <div class="user-info">
+            <img>
+            <div class="user-info-text">
+                <h2 id="chat-title">Почніть нове спілкування</h2>
+            </div>
+        </div>
+        <p id="chat-status">Оберіть контакт зі списку ліворуч або створіть групу, щоб почати спілкування</p>
+    </div>
+
+    <div id= "message_container" class= "message-container"></div>
+
+    <form id="chat_form" class="message-form">
+        <input id="message-input" type="text" placeholder="Повідомлення" autocomplete="off">
+        <div class= "button-holder">
+            <button class="empty-round-button message-button" type="button">
+                <img src= "{% static 'chat_app/images/emoji.png' %}">
+            </button>
+            <button class="empty-round-button message-button" type="button">
+                <img src= "{% static 'chat_app/images/image.png' %}">
+            </button>
+            <button class="full-round-button message-button" type="submit">
+                <img src= "{% static 'chat_app/images/send.png' %}">
+            </button>
+        </div>
+    </form>
+</div>

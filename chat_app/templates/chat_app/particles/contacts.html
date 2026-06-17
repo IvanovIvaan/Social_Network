@@ -1,0 +1,40 @@
+{% load static %}
+
+<div class= "container contact-list-container">
+    <div class="contacts-title">
+        <img src="{% static 'chat_app/images/contacts.png' %}" alt="">
+        <h2>Контакти</h2>
+    </div>
+    <div class="search-contact">
+        <input id= "search_contact" type="text" placeholder="Пошук">
+    </div>
+    <div class="contacts-list">
+        {% for contact in contacts.users %}
+            <button type= "button" class="contact" 
+                data-chat-user = "{{ contact.id }}" 
+                data-chat-username = "{{ contact.email }}" 
+                data-chat-nickname = '{{ contact.nickname }}'
+                data-chat-avatar= "
+                    {% if contact.avatar %}
+                        {{ contact.avatar.url }}
+                    {% else %}
+                        {% static 'images/profile/none_avatar.jpg' %}
+                    {% endif %}
+                    "
+                >
+                <div class="chats-image">
+                    {% if contact.avatar %}
+                        <img src="{{ contact.avatar.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'images/profile/none_avatar.jpg' %}" alt="">
+                    {% endif %}
+                    
+                </div>
+                <h3>{{ contact.nickname }}</h3>
+            </button>
+        {% empty %}
+            <p class="empty-text">Порожньо</p>
+            <p class="empty-text-2">У вас поки немає друзів</p>
+        {% endfor %}
+    </div>
+</div>

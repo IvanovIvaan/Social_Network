@@ -2,34 +2,60 @@
 
 {% load static %}
 
+{% block meta %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="delete-image" image= "{% static 'chat_app/images/delete.png' %}">
+    <meta name="current-user" username="{{ request.user.username }}" 
+        nickname ="{{ request.user.nickname }}"
+        avatar="
+            {% if request.user.avatar %}
+                {{ request.user.avatar.url }}
+            {% else %}
+                {% static 'images/profile/none_avatar.jpg' %}
+            {% endif %}
+         "
+        >
+    <meta name="three-dotes" image= "{% static 'chat_app/images/three_dotes.png' %}">
+    <meta name="black-image" image= "{% static 'chat_app/images/black_image.png' %}">
+    <meta name="pencil" image= "{% static 'chat_app/images/pencil.png' %}">
+    <meta name="trash" image= "{% static 'chat_app/images/trash.png' %}">
+{% endblock %}
+
 {% block title %}
     Чати
 {% endblock %}
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'chat_app/css/chat.css' %}">
+    <link rel="stylesheet" href="{% static 'chat_app/css/group.css' %}">
 {% endblock %}
 
 {% block profile_block %}
     <div class= "side-panel-content">
-        <button class="create-group">
-            <img src="" alt="">
+        <button id="open-group-modal" class="create-group">
+            <img src="{% static 'chat_app/images/white_add.png' %}" alt="">
             Створити груповий чат
         </button>
-        <div class= "container contact-list-container"></div>
+        {% include 'chat_app/particles/contacts.html' %}
+        <!-- with users=section.users section=key -->
     </div>
 {% endblock %}
 
 {% block content %}
+    {% include "chat_app/particles/create_group_2.html" %}
+
     <div class= "chat-content">
-        <div class="container chat-container"></div>
+        {% include "chat_app/particles/chat_container.html" %}
         <div class="right-chat-containers">
-            <div class="container chat-list"></div>
-            <div class="container chat-list"></div>
+            <!-- <div class="container chat-list"></div>
+            <div class="container chat-list"></div> -->
+            {% include "chat_app/particles/chats.html" %}
+            {% include "chat_app/particles/groups.html" %}
         </div>
     </div>
 {% endblock %}
 
-{% block script %}
-    
+{% block scripts %}
+    <script type="module" src="{% static 'chat_app/js/chat_2.js' %} "></script>
+    <script type="module" src="{% static 'chat_app/js/groups.js' %} "></script>
 {% endblock %}

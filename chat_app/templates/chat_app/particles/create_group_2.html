@@ -1,0 +1,85 @@
+{% load static %}
+
+<div id="group-modal" class="group-modal" hidden>
+    <div class="group-modal__box">
+        <div class="group-step" id="group-step-users">
+            <nav class="close-modal">
+                <button id="close-group-modal" class="group-modal__close" type="button">
+                    <img id= "close_modal_button" src = "{% static 'chat_app/images/close.png' %}">
+                </button>
+            </nav>
+            <h1>Нова група</h1>
+            <div class="groups-input">
+                <input id="search-friends" type="text" placeholder="Пошук">
+            </div>
+            <p class= "friend-count">Вибрано: <span id="selected-count">0</span></p>
+            <div class="group-friends">
+                {% for contact in contacts.users %}
+                    <!-- <div class="user-to-select" data-name = "{{ contact.nickname }}"> -->
+                        <!-- <hr> -->
+                        <label class="group-friend" data-name = "{{ contact.nickname }}">
+                            <div class= "contact-info">
+                                <div class = "contact-avatar">
+                                    {% if contact.avatar %}
+                                        <img src="{{ contact.avatar.url }}" alt="">
+                                    {% else %}
+                                        <img src="{% static 'images/profile/none_avatar.jpg' %}" alt="">
+                                    {% endif %}
+                                </div>
+                                <h2>{{ contact.nickname }}</h2>
+                            </div>
+                            <input class="group-user-checkbox" type="checkbox" 
+                                value="{{ contact.id }}" 
+                                data-user-name="{{ contact.email }}" 
+                                data-nickname = "{{ contact.nickname }}"
+                                data-avatar = "
+                                    {% if contact.avatar %}
+                                        {{ contact.avatar.url }}
+                                    {% else %}
+                                        {% static 'images/profile/none_avatar.jpg' %}
+                                    {% endif %}
+                                "
+                            >
+                        </label>
+                    <!-- </div> -->
+                {% endfor %}
+            </div>
+            <div class="group-modal__actions">
+                <button class="group-empty-button" id="cancel-group-modal" type="button">Скасувати</button>
+                <button class="group-full-button" id="next-group-step" type="button">Далі</button>
+            </div>
+        </div>
+        <div class="group-step" id="group-step-name" hidden>
+            <nav class="close-modal">
+                <button id="close-group-name-modal" class="group-modal__close" type="button">
+                    <img id= "close_modal_button" src = "{% static 'chat_app/images/close.png' %}">
+                </button>
+            </nav>
+            <h1>Нова група</h1>
+            <div class="groups-input">
+                <label class= "label-name" for="group-name">Назва</label>
+                <input id="group-name" type="text" placeholder="Введіть назву" maxlength="30">
+            </div>
+            <div class="set-group-avatar-container">
+                <div class="usual-group-avatar"></div>
+                <div class="set-group-avatar-buttons">
+                    <label id="add-group-avatar">
+                        <input type="file" accept="image/*" id="add-group-avatar-input">
+                        <img src="{% static 'chat_app/images/add.png' %}" alt=""> 
+                        Додайте фото
+                    </label>
+                    <button id="choose-group-avatar">
+                        <img src="{% static 'chat_app/images/image.png' %}" alt=""> 
+                        Оберіть фото
+                    </button>
+                </div>
+            </div>
+            <h3 class="text-members">Учасники</h3>
+            <div class= "selected-users-list" id="selected-users-list"></div>
+            <div class="group-modal__actions">
+                <button class="group-empty-button" id="back-group-step" type="button">Назад</button>
+                <button class="group-full-button" id="create-group" type="submit">Створити групу</button>
+            </div>
+        </div>
+    </div>
+</div>

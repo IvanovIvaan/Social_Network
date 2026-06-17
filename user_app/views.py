@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, get_user_model
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.views import View
 from .forms import EmailUserCreationForm, EmailAuthenticationForm, EmailConfirmForm, User
 from django.http import JsonResponse, HttpRequest
@@ -13,6 +13,9 @@ from .utils.confirm_code import *
 from .utils.friend_queries import get_users_by_section
 from .utils.friend_actions import add_friend_request, dismiss_recommendation, accept_friend_request, delete_friendship
 from django.urls import reverse_lazy
+from post_app.models import Post
+from .models import Friendship
+from .utils.friendship_status import get_friendship_status
 
 User = get_user_model()
 
@@ -160,9 +163,19 @@ class FriendsView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sections'] = {
-            'requests': {'title': 'Запити', 'users': get_users_by_section(user = self.request.user, section= 'requests')[:3]},
-            'recommendations': {'title': 'Рекомендації', 'users': get_users_by_section(user = self.request.user, section= 'recommendations')[:6]},
-            'friends': {'title': 'Всі друзі', 'users': get_users_by_section(user = self.request.user, section= 'friends')[:6]},
+            'requests': {
+                'title': 'Запити', 
+                'users': get_users_by_section(user = self.request.user, section= 'requests')[:3]
+            },
+            'recommendations': {
+                'title': 'Рекомендації', 
+                'users': get_users_by_section(user = self.request.user, section= 'recommendations')[:6]
+            },
+            'friends': {
+                'title': 'Всі друзі', 
+                'count': get_users_by_section(user=self.request.user,section= 'friends').count(), 
+                'users': get_users_by_section(user = self.request.user, section= 'friends')[:6]
+            },
         }
         return context
 
@@ -221,3 +234,55 @@ class FriendActionView(LoginRequiredMixin, View):
             return JsonResponse(action_result)
         
         return JsonResponse(delete_friendship(request.user, other_user))
+    
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    template_name = "user_app/user_profile.html"
+    model = User
+    pk_url_kwarg = "user_id"
+    context_object_name = "profile_user"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.object = self.get_object()
+
+        context['friendship_status'] = get_friendship_status(self.request.user, self.object)
+
+        #label
+
+        user = self.get_object()
+        posts = Post.objects.filter(author= user).order_by('-created_at')
+        paginator = Paginator(posts, 10)
+        page_number = self.request.GET.get('page')
+        page_object = paginator.get_page(page_number)
+
+        context['posts'] = page_object
+        return context
+
+    # def get(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+
+    #     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+    #         user = self.object
+
+    #         posts = Post.objects.filter(author=user).order_by('-created_at')
+
+    #         paginator = Paginator(posts, 10)
+    #         page_number = request.GET.get('page')
+    #         page_object = paginator.get_page(page_number)
+
+    #         if page_number and int(page_number) > paginator.num_pages:
+    #             return JsonResponse({'success': False})
+
+    #         html = render_to_string(
+    #             "post_app/particles/list_post.html",
+    #             {'posts': page_object},
+    #             request=request
+    #         )
+
+    #         return JsonResponse({
+    #             'success': True,
+    #             'html': html
+    #         })
+
+    #     return super().get(request, *args, **kwargs)

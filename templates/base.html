@@ -24,27 +24,40 @@
                 
                     <div class="links">
                         <a href="{% url 'home' %}">
-                            <img class= "icon" src="{% static 'images/header_logo/home.png' %}">
+                            <div id="icon-home" class="icon-container">
+                                <img class= "icon" src="{% static 'images/header_logo/home.png' %}">
+                            </div>
                             <p>Головна</p>
                         </a>
 
                         <a href="{% url 'post_list' %}">
-                            <img class="icon" src="{% static 'images/header_logo/post.png' %}">
+                            <div id="icon-posts" class="icon-container">
+                                <img class="icon" src="{% static 'images/header_logo/post.png' %}">
+                                <div class="icon-new">
+                                    1
+                                </div>
+                            </div>
                             <p>Мої публікації</p>
                         </a>
 
                         <a href="{% url 'friends' %}">
-                            <img class="icon" src="{% static 'images/header_logo/friends.png' %}">
+                            <div id="icon-friends" class="icon-container">
+                                <img class="icon" src="{% static 'images/header_logo/friends.png' %}">
+                            </div>
                             <p>Друзі</p>
                         </a>
 
                         <a href="{% url 'chat' %}">
-                            <img class= "icon" src="{% static 'images/header_logo/chat.png' %}">
+                            <div id="icon-chats" class="icon-container">
+                                <img class= "icon" src="{% static 'images/header_logo/chat.png' %}">
+                            </div>
                             <p>Чати</p>
                         </a>
                     
                         <a href="{% url 'settings' %}">
-                            <img class= "icon" src="{% static 'images/header_logo/settings.png' %}">
+                            <div id="icon-settings" class="icon-container">
+                                <img class= "icon" src="{% static 'images/header_logo/settings.png' %}">
+                            </div>
                             <p>Налаштування</p>
                         </a>
                     
@@ -73,10 +86,8 @@
                             <div class="profile-container">
                                 <div class="profile-image">
                                     {% if request.user.avatar %}
-                                        <img src= "{{ request.user.avatar.url }}">
-                                        
-                                    {% endif %}
-                                    {% if not request.user.avatar %}
+                                        <img src= "{{ request.user.avatar.url }}?v={{ request.user.updated_at.timestamp }}">
+                                    {% else %}
                                         <img src="{% static 'images/profile/none_avatar.jpg' %}">
                                     {% endif %}
                                 </div>

@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="container chat-list">
+    <div class= "chats-label">
+        <div class= "chats-title">
+            <img src="{% static 'chat_app/images/Group.png' %}" alt="">
+            <h2>Повідомлення</h2>
+        </div>
+        <!-- <button class="view-all-button" type="button">Дивитись всі</button> -->
+    </div>
+    <div id= 'chats_list' class="chats-list">
+        {% for chat in personal_chats %}
+            <button id= 'other_user_button' type= "button" class="chat" 
+                data-chat-id="{{ chat.id }}"
+                data-chat-user="{{ chat.user_id }}"
+                data-chat-username="{{ chat.username }}"
+                data-chat-nickname="{{ chat.nickname }}"
+                data-chat-avatar="{{ chat.avatar }}"
+                >
+                    
+                <div class="chats-image">
+                    <img src="{{ chat.avatar }}" alt="">
+                </div>
+            
+                <div class="chat-text">
+                    <div class="chat-info">
+                        <h3>{{ chat.nickname }}</h3>
+                        <p>{{ chat.last_message.text|default:"Немає повідомлень" }}</p>
+                        <!-- <p>Привіт</p> -->
+                    </div>
+                    <div class="new-messages">
+                        {% if chat.unread_count > 0 %}
+                            <div class="icon-new-chats">{{ chat.unread_count }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            
+            </button>
+        {% empty %}
+            <p id="chats-empty-text" class= "empty-text" id="chat-empty">Порожньо</p>
+            <p id="chats-empty-text-2"  class="empty-text-2">У вас поки немає активних чатів</p>
+        {% endfor %}
+    </div>
+</div>

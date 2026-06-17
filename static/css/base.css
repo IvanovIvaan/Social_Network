@@ -74,10 +74,11 @@ header {
 .links {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 55vw;
-    height: 3.7vh;
+    /* justify-content: space-between; */
+    gap: 1.6vw;
     align-items: center;
+    /* width: 55vw; */
+    height: 3.7vh;
 }
 
 .links p {
@@ -104,7 +105,7 @@ header {
 .logo {
     display: flex;
     align-items: center;
-    padding: 0.5vw;
+    /* padding: 0.5vw; */
 }
 
 .exit-link {
@@ -134,8 +135,8 @@ header {
     display: flex;
     flex-direction: column;
     width: 20vw;
+    height: 92vh;
     gap: 1vh;
-    
 }
 
 .profile-block {
@@ -222,11 +223,36 @@ header {
     flex-direction: column;
     flex: 1;
 
-    height: 90vh;
+    height: 92vh;
     
     gap: 1vh;
     overflow-y: auto;
 }
 .right-container::-webkit-scrollbar {
     display: none;
+}
+
+.icon-container {
+    position: relative;
+}
+
+.icon-new {
+    position: absolute;
+    top: -0.4vh;
+    right: -0.3vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 1.8vh;
+    height: 1.8vh;
+
+    background-color: #FF4C4C;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: 2px solid white;
+    border-radius: 1234px;
 }

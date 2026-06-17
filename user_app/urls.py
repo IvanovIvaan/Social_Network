@@ -7,7 +7,8 @@ from .views import (AuthTemplateView,
                     LogoutView, 
                     FriendsView, 
                     ShowSection,
-                    FriendActionView
+                    FriendActionView,
+                    UserProfileView
                     )
 
 urlpatterns = [
@@ -20,6 +21,7 @@ urlpatterns = [
     path(route= 'friends/', view= FriendsView.as_view(), name= 'friends'),
     path(route= 'friends/show-section/', view= ShowSection.as_view(), name= 'show-section'),
     path(route= 'friends/action/<int:user_id>/<str:action>/', view= FriendActionView.as_view(), name= 'friend_action'),
+    path(route= 'friends/profile/<int:user_id>/', view= UserProfileView.as_view(), name= 'user_profile'),
     
     path(route= 'settings/', view= render_settings, name= 'settings'),
 ]

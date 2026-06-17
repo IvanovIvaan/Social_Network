@@ -1,6 +1,8 @@
 from django import forms
 from user_app.models import User
 
+from utils.compressed_image import _compressed_image
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
@@ -15,6 +17,12 @@ class ProfileForm(forms.ModelForm):
             'username': forms.TextInput(attrs={'placeholder': '@'}),
             'avatar': forms.FileInput(attrs= {'class': 'setAvatarButton'})
         }
+
+        def clean_avatar(self):
+            avatar = self.cleaned_data.get('avatar')
+            if avatar:
+                return _compressed_image(avatar)
+            return avatar
 
         def clean_username(self):
             cleaned_data = super().clean()

@@ -133,3 +133,7 @@
 .no-post-container h3 {
     font-weight: 400;
 }
+.no-post-container h4 {
+    font-size: 1.3rem;
+    font-weight: 500;
+}

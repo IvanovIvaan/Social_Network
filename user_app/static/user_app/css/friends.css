@@ -57,7 +57,9 @@
 
     padding: 1.6vh 1.4vw;
     margin-bottom: 0.7vh;
+    cursor: pointer;
 }
+
 .person-container h3 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -156,4 +158,30 @@
     text-underline-offset: 1vh;
     text-decoration-thickness: 2px;
     text-decoration-color: #543C52;
+}
+
+.profile-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vw;
+}
+
+.back-friends-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+.back-friends-button a {
+    color: #3f2b3d;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.back-friends-button a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.5vh;
+    text-decoration-thickness: 2px;
 }
