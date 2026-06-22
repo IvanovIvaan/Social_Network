@@ -8,6 +8,50 @@ import json
 from .models import Chat, Message
 
 
+class PresenceConsumer(AsyncWebsocketConsumer):
+    online_users = set()
+    async def connect(self):
+        self.user = self.scope['user']
+        self.user_id = str(self.user.id)
+        self.group_name = 'online_users'
+        await self.channel_layer.group_add(self.group_name, self.channel_name)
+        await self.accept()
+        self.online_users.add(self.user_id)
+        for user_id in self.online_users:
+            await self.send_status(user_id, 'online')
+        await self.channel_layer.group_send(
+            self.group_name,
+            {
+                "type": "presence_status",
+                "user_id": self.user_id,
+                "status": "online"
+            }
+        )
+    async def presence_status(self, event):
+        await self.send_status(event["user_id"], event["status"])
+
+    async def send_status(self, user_id, status):
+        await self.send(text_data = json.dumps(
+            {
+                "user_id": user_id,
+                "status": status,
+            }
+        ))
+
+    async def disconnect(self, close_code):
+        self.online_users.discard(self.user_id)
+        await self.channel_layer.group_send(
+            self.group_name,
+            {
+                "type": "presence_status",
+                "user_id": self.user_id,
+                "status": "offline"
+            }
+        )
+        await self.channel_layer.group_discard(self.group_name, self.channel_name)
+
+
+        
 class ChatConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
@@ -109,6 +153,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "nickname": message['nickname'],
                 "avatar": message["avatar"],
                 "created_at": message["created_at"],
+                "images": message["images"]
             }
         )
 
@@ -132,6 +177,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "nickname": text['nickname'],
                 "avatar": text["avatar"],
                 "created_at": text["created_at"],
+                "images": text.get("images", [])
                 # "unread_count": text["unread_count"],
             }
         ))
@@ -147,7 +193,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'sender': user.username,
             'nickname': user.nickname,
             'avatar': user.avatar.url if user.avatar else static('images/profile/none_avatar.jpg'),
-            'created_at': localtime(message.created_at).strftime('%H:%M')
+            'created_at': localtime(message.created_at).strftime('%H:%M'),
+            "images": []
         }
     
     @database_sync_to_async

@@ -10,6 +10,7 @@ from django.db import transaction
 import os
 from django.conf import settings
 from django.db import models
+from user_app.utils.friend_queries import get_users_by_section
 
 from .forms import PostCreationForm, MultipleFileField, MultipleFileInput, TagCreationForm
 from .models import Post
@@ -30,7 +31,8 @@ class PostListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['form_post_creation'] = PostCreationForm()
         context['form_tag_creation'] = TagCreationForm()
-        # context['posts'] = Post.objects.filter(author_id = self.request.user)[:self.paginate_by]
+        context['my_posts'] = Post.objects.filter(author_id = self.request.user)
+        context['friends'] = get_users_by_section(user = self.request.user, section= 'friends')
         return context
     
     def get(self, request, *args, **kwargs):

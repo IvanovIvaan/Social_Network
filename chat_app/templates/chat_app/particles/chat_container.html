@@ -19,8 +19,9 @@
             <button class="empty-round-button message-button" type="button">
                 <img src= "{% static 'chat_app/images/emoji.png' %}">
             </button>
-            <button class="empty-round-button message-button" type="button">
+            <button id="message-image-button" class="empty-round-button message-button" type="button">
                 <img src= "{% static 'chat_app/images/image.png' %}">
+                <input type="file" id="message-images" accept="image/*" multiple hidden>
             </button>
             <button class="full-round-button message-button" type="submit">
                 <img src= "{% static 'chat_app/images/send.png' %}">

@@ -281,6 +281,7 @@ hr {
     border: none;
     border-radius: 10px;
     width: fit-content;
+    max-width: 20vw;
     align-self: end;
     background-color: #CDCED2;
 }
@@ -292,6 +293,7 @@ hr {
     padding: 1.5vh 1vw;
     border-radius: 10px;
     width: fit-content;
+    max-width: 20vw;
     align-self: end;
     border: 1px solid #CDCED2;
 }
@@ -305,6 +307,7 @@ hr {
     flex-direction: row;
     justify-content: end;
     align-items: center;
+    /* max-width: 20vw; */
     gap: 0.7vw;
     flex-wrap: nowrap;
     flex-flow: row-reverse;
@@ -400,3 +403,20 @@ hr {
     height: auto;
 }
 
+.add-group-avatar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5vw;
+    transition: 0.2s;
+    color: #543C52;
+    cursor: pointer;
+}
+
+.add-group-avatar:hover {
+    color: #362235;
+}
+
+.add-group-avatar input {
+    display: none;
+}

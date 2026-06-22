@@ -30,7 +30,9 @@
                     {% endif %}
                     
                 </div>
-                <h3>{{ contact.nickname }}</h3>
+                <h3>{{ contact.nickname|truncatechars:"30" }}</h3>
+                
+                
             </button>
         {% empty %}
             <p class="empty-text">Порожньо</p>

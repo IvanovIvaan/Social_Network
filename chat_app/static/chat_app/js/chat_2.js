@@ -1,3 +1,5 @@
+import { renderMessageImages, hasMessageImages, hasSelectedImages, clearSelectedImages, getSelectedImages } from "./loadImages.js";
+
 function getCSRFToken() {
     return document.querySelector('meta[name = "csrf-token"]').getAttribute('content')
 }
@@ -41,6 +43,14 @@ const blackImageImage = document.querySelector('meta[name = "black-image"]').get
 const pencilImage = document.querySelector('meta[name = "pencil"]').getAttribute('image')
 const trashImage = document.querySelector('meta[name = "trash"]').getAttribute('image')
 
+
+// Вебсокет Картинки
+const messageImagesInput = document.getElementById("message-images")
+const messageImageButton = document.getElementById("message-image-button")
+
+
+
+
 //
 function renderMessage(data){
     const message = document.createElement('div')
@@ -51,7 +61,9 @@ function renderMessage(data){
             message.className = "message"
         }
         message.innerHTML = `
-            <div class='message-text'>${data.text}</div>
+            <div class="message-content">
+                <div class='message-text'>${data.text}</div>
+            </div>
             <div class='message-time'>${data.created_at}</div>
         `
     } else if (activeChatType === "group") {
@@ -59,10 +71,13 @@ function renderMessage(data){
             message.className = "our-group-message"
             message.innerHTML = `
                 <div class = "our-group-message-container">
-                    <div class='message-text'>${data.text}</div>
+                    <div class="message-content">
+                        <div class='message-text'>${data.text}</div>
+                    </div>
                     <div class='message-time'>${data.created_at}</div>
                 </div>
             `
+            }
         } else {
             message.className = "group-message"
             message.innerHTML = `
@@ -72,18 +87,36 @@ function renderMessage(data){
                 <div class = "group-message-container">
                     <h4>${data.nickname}</h4>
                     <div class="group-message-content">
-                        <div class='message-text'>${data.text}</div>
+                        <div class="message-content">
+                            <div class='message-text'>${data.text}</div>
+                        </div>
                         <div class='message-time'>${data.created_at}</div>
                     </div>
                 </div>
             `
         }
-        
+
+    if(hasMessageImages(data)){
+        message.querySelector(".message-content").appendChild(renderMessageImages(data.images))
     }
-    
-    // message.textContent = `${data.sender}: ${data.text}`
+
     return message
 }
+
+// function renderMessage(data) {
+//     // Створюємо блок повідомлення.
+//     const message = document.createElement("div");
+//     // Додаємо клас повідомлення.
+//     message.className = "message";
+//     // Записуємо автора і текст.
+//     message.textContent = `${data.sender}: ${data.text}`;
+//     if(hasMessageImages(data)){
+//         message.appendChild(renderMessageImages(data.images))
+//     }
+//     // Повертаємо готовий блок.
+//     return message;
+// }
+
 // 
 function resetMessages(chatId){
     activeChatId = chatId
@@ -243,7 +276,19 @@ async function openChatWithUser(userId, username, nickname, avatar) {
         emptyText2.remove()
     }
 
-    document.querySelector('.user-info').insertAdjacentElement('afterbegin', userAvatar)
+    
+
+    const userChatText = document.querySelector(".user-info-text")
+    const previousStatusText = userChatText.querySelector("h4")
+    if (previousStatusText) {
+        previousStatusText.remove()
+    }
+    const statusChatText = document.createElement("h4")
+    statusChatText.textContent = "Не в мережі"
+    
+    userChatText.appendChild(statusChatText)
+    userChatText.dataset.userId = `${userId}`
+    document.querySelector(".user-info").insertAdjacentElement('afterbegin', userAvatar)
     chatTitle.textContent = `${data.nickname || nickname}`
     
     chatWindow.classList.add('is-open')
@@ -284,8 +329,10 @@ async function openChatWithUser(userId, username, nickname, avatar) {
         </div>
     
         <div class="chat-text">
-            <h3>${nickname}</h3>
-            <p>Привіт, лееллелелелеле</p>
+            <div class="chat-info">
+                <h3>${nickname}</h3>
+                <p>Привіт, лееллелелелеле</p>
+            </div>
         </div>
     `
     chatList.appendChild(chatWithUserButton)
@@ -435,14 +482,47 @@ document.addEventListener('click', async (event) => {
     )
 })
 
+// Вiдправляємо повiдомлення iз зображеннями через HTTP Upload EndPoint
+export async function sendMessageWithImages(text){
+    const formData = new FormData()
+    formData.append("text", text)
+
+    getSelectedImages().forEach((image) => {
+        formData.append("images", image)
+    })
+    const response = await fetch(
+        `/chat/${activeChatId}/messages/upload/`,
+        {
+            method: "POST",
+            headers: { "X-CSRFToken": csrfToken },
+            body: formData
+        }
+    )
+    return response.json()
+}
+// Як тiльки ми будемо клiкати по кнопцi, ми вiдкриємо панель завантаження зображень
+messageImageButton.addEventListener(
+    'click',
+    function(){
+        messageImagesInput.click()
+    }
+)
 
 
 messageForm.addEventListener(
     'submit',
-    function (event){
+    async function (event){
         event.preventDefault()
         const text = messageInput.value.trim()
-        if (!text){return}
+        // if (!text){return}
+        if (!text && !hasSelectedImages()) return;
+        if (hasSelectedImages()){
+            const data = await sendMessageWithImages(text)
+            if (!data.success) return;
+            messageInput.value = ""
+            clearSelectedImages()
+            return
+        }
         chatSocket.send(JSON.stringify({text: text}))
         messageInput.value = ''
     }

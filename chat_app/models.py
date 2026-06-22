@@ -24,3 +24,10 @@ class Message(models.Model):
 
     def __str__(self):
         return self.text[:30]
+    
+class MessageImage(models.Model):
+    message = models.ForeignKey(Message, on_delete= models.CASCADE, related_name = "images")
+    image = models.ImageField(upload_to = 'chat_app/chat_images/')
+
+    def __str__(self):
+        return f"<Image, for message: {self.message_id}>"

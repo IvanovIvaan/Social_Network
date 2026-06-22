@@ -1,16 +1,19 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest
 from django.contrib.auth import get_user_model
 from django.templatetags.static import static
 from django.core.paginator import Paginator
 from django.utils.timezone import localtime
 from django.db.models import Count, Q
 import json
+from asgiref.sync import async_to_sync
+from django.utils import timezone
+from channels.layers import get_channel_layer
 
 from user_app.utils.friend_queries import get_users_by_section
-from .models import Chat, Message
+from .models import Chat, Message, MessageImage
 from .forms import MessageForm
 from utils.compressed_image import _compressed_image
 
@@ -110,8 +113,10 @@ class MessageHistoryView(
                     'text': message.text, 
                     'sender': message.sender.username,
                     'nickname': message.sender.nickname, 
-                    'created_at': localtime(message.created_at).strftime('%H:%M'),
-                    'avatar': message.sender.avatar.url if message.sender.avatar else static('images/profile/none_avatar.jpg')
+                    # 'created_at': localtime(message.created_at).strftime('%H:%M'),
+                    'created_at': timezone.localtime(message.created_at).strftime('%H:%M'),
+                    'avatar': message.sender.avatar.url if message.sender.avatar else static('images/profile/none_avatar.jpg'),
+                    'images': [image.image.url for image in message.images.all()]
                 } for message in messages],
             'has_next': page_object.has_next(),
         })
@@ -149,3 +154,37 @@ class CreateGroupView(
             "avatar": chat.avatar.url if chat.avatar else None,
         })
     
+class MessageUploadView(LoginRequiredMixin, View):
+    def post(self, request: HttpRequest, chat_id: int, *args, **kwargs):
+
+        if not Chat.objects.filter(id = chat_id, users = request.user).exists():
+            return JsonResponse({'success': False}, status= 403)
+        
+        text = request.POST.get("text", "").strip()
+        images = request.FILES.getlist("images")
+        
+        if not images and not text:
+            return JsonResponse({'success': False, "error": "required message"}, status= 400)
+        
+        message = Message.objects.create(chat_id= chat_id, sender= request.user, text= text)
+        
+        for image in images:
+            MessageImage.objects.create(message= message, image= image)
+        
+        image_urls= [image.image.url for image in message.images.all()] 
+        
+        channel_layer= get_channel_layer()
+
+        
+        async_to_sync(channel_layer.group_send)(
+            f"chat_{chat_id}",
+            {
+                "type": "chat_message",
+                "id": message.id,
+                "text": message.text,
+                "sender": message.sender.username,
+                "created_at": timezone.localtime(message.created_at).strftime('%H:%M'),
+                "images": image_urls
+            }
+        )
+        return JsonResponse({"success": True })

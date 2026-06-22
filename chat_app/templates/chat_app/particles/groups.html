@@ -10,7 +10,8 @@
     </div>
     <div id= 'group-list' class="chats-list">
         {% for chat in group_chats %}
-        <button type="button" class="chat-group-button chat" data-chat-id="{{ chat.id }}" 
+        <button type="button" class="chat-group-button chat {% if chat.unread_count %}chat-has-unread{% endif %}" 
+            data-chat-id="{{ chat.id }}" 
             data-chat-title="{{ chat.name }}" 
             data-user-count = "{{ chat.users.count }}" 
             {% if chat.avatar %}
@@ -23,7 +24,16 @@
                         <h3>{{ chat.name|slice:":2"|upper }}</h3>
                     {% endif %}
                 </div>
-                {{ chat.name|truncatechars:"30" }}
+
+                <div class="chat-button-info">
+                    <span class="chat-button-title">
+                        {{ chat.name|truncatechars:"30" }}
+                    </span>
+                    <span class="chat-button-last">
+                        {{ chat.last_message_text|truncatechars:"30" }}
+                    </span>
+                </div>
+
             </button>
         {% empty %}
             <p id="groups-empty-text" class="empty-text">Порожньо</p>

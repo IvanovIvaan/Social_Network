@@ -1,0 +1,31 @@
+{% load static %}
+
+<div class= "profile-block">
+    <div class="profile-container">
+        <div class="profile-image">
+            {% if request.user.avatar %}
+                <img src= "{{ request.user.avatar.url }}?v={{ request.user.updated_at.timestamp }}">
+            {% else %}
+                <img src="{% static 'images/profile/none_avatar.jpg' %}">
+            {% endif %}
+        </div>
+        <h1 class="nickname">{{ request.user.nickname }}</h1>
+        <p>{{ request.user.username }}</p>
+        <div class="profile-statistic">
+            <div>
+                <h1>{{ my_posts|length }}</h1>
+                <p>Дописи</p>
+            </div>
+            <hr>
+            <div>
+                <h1>0</h1>
+                <p>Читачі</p>
+            </div>
+            <hr>
+            <div>
+                <h1>{{ friends|length }}</h1>
+                <p>Друзі</p>
+            </div>
+        </div>
+    </div>
+</div>

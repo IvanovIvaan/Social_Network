@@ -17,6 +17,12 @@
     <link rel="stylesheet" href="{% static 'post_app/css/single_post.css' %}">
 {% endblock %}
 
+{% block profile_block %}
+
+    {% include 'home_app/particles/profile_block.html' %}
+
+{% endblock %}
+
 {% block content %}
     {% include 'post_app/particles/form_post_content.html' %}
 

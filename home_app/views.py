@@ -39,6 +39,8 @@ class AllPostListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['form_post_creation'] = PostCreationForm()
         context['form_tag_creation'] = TagCreationForm()
+        context['friends'] = get_users_by_section(user = self.request.user, section= 'friends')
+        context['my_posts'] = Post.objects.filter(author_id = self.request.user)
         context['sections'] = {
             'requests': {
                 'title': 'Запити', 
@@ -49,6 +51,7 @@ class AllPostListView(LoginRequiredMixin, ListView):
                 'users': get_users_by_section(user = self.request.user, section= 'friends')[:3]
             },
         }
+
         if(self.request.user.is_authenticated and not self.request.user.profile_completed):
             context['form_profile'] = ProfileForm()
         return context
