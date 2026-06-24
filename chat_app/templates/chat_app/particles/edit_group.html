@@ -1,0 +1,38 @@
+{% load static %}
+
+<div id="edit-group-big-modal" class="group-modal">
+    <div class="group-modal__box">
+        <div class="group-step" id="group-step-name">
+            <nav class="close-modal">
+                <button id="close-group-name-modal" class="group-modal__close" type="button">
+                    <img id= "close_modal_button" src = "{% static 'chat_app/images/close.png' %}">
+                </button>
+            </nav>
+            <h1>Редагування групи</h1>
+            <div class="groups-input">
+                <label class= "label-name" for="group-name">Назва</label>
+                <input id="edit-group-name" type="text" placeholder="Введіть назву" maxlength="30">
+            </div>
+            <div class="set-group-avatar-container">
+                <div class="usual-group-avatar"></div>
+                <div class="set-group-avatar-buttons">
+                    <label class="add-group-avatar" id="add-group-avatar">
+                        <input type="file" accept="image/*" id="edit-group-avatar">
+                        <img src="{% static 'chat_app/images/add.png' %}" alt=""> 
+                        Додайте фото
+                    </label>
+                    <button id="choose-group-avatar">
+                        <img src="{% static 'chat_app/images/image.png' %}" alt=""> 
+                        Оберіть фото
+                    </button>
+                </div>
+            </div>
+            <h3 class="text-members">Учасники</h3>
+            <div class= "group-users-list" id="group-users-list"></div>
+            <div class="group-modal__actions">
+                <button class="group-empty-button" id="close_modal_button" type="button">Назад</button>
+                <button class="group-full-button" id="edit-group" type="button">Зберегти зміни</button>
+            </div>
+        </div>
+    </div>
+</div>

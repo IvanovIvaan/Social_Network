@@ -632,3 +632,31 @@ input:focus {
     color: #81818D;
     font-size: 0.9rem;
 }
+
+.image-handler {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.image-handler img {
+    width: 50%;
+    height: auto;
+}
+.chat {
+    order: 2;
+}
+.chat-has-unread {
+    order: 1;
+    background-color: #e9e4e8;
+}
+.opened-chat-priority {
+    background-color: #e9e4e8;
+}

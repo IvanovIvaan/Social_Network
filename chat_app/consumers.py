@@ -105,36 +105,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def disconnect(self, close_code):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
         
-    #
-    # async def receive(self, text_data):
-    #     data = json.loads(text_data)
-    #     text = data.get('text', '').strip()
-    #     if not text:
-    #         return
-    #     message = await self.save_message(text)
-    #     await self.channel_layer.group_send(
-    #         self.room_group_name,
-    #         {
-    #             'type': "send_message",
-    #             "id": message["id"],
-    #             "text": message["text"],
-    #             "sender": message["sender"],
-    #             "nickname": message['nickname'],
-    #             'avatar': message["avatar"],
-    #             "created_at": message["created_at"],
-    #             "unread_count": message["unread_count"],
-    #         }
-    #     )
-
-    #     unread_count = await self.get_unread_count()
-    #     await self.channel_layer.group_send(
-    #         self.room_group_name,
-    #         {
-    #             'type': "update_unread",
-    #             "chat_id": self.chat_id,
-    #             "unread_count": unread_count
-    #         }
-    #     )
+    
     async def receive(self, text_data):
         data = json.loads(text_data)
         text = data.get('text', '').strip()
@@ -181,6 +152,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 # "unread_count": text["unread_count"],
             }
         ))
+    
+    async def chat_message(self, event):
+        await self.send(text_data=json.dumps({
+            "id": event["id"],
+            "text": event["text"],
+            "sender": event["sender"],
+            "created_at": event["created_at"],
+            "images": event.get("images", [])
+        }))
 
     #
     @database_sync_to_async
@@ -209,3 +189,41 @@ class ChatConsumer(AsyncWebsocketConsumer):
             "chat_id": event["chat_id"],
             "unread_count": event["unread_count"]
         }))
+
+
+class NotificationConsumer(AsyncWebsocketConsumer):
+
+    async def connect(self):
+
+        user = self.scope["user"]
+
+        if user.is_anonymous:
+            await self.close()
+            return
+
+        self.group_name = f"user_{user.id}"
+
+        await self.channel_layer.group_add(
+            self.group_name,
+            self.channel_name
+        )
+
+        await self.accept()
+
+    async def disconnect(self, close_code):
+
+        await self.channel_layer.group_discard(
+            self.group_name,
+            self.channel_name
+        )
+
+    async def unread_update(self, event):
+
+        await self.send(
+            text_data=json.dumps({
+                "type": "unread_update",
+                "chat_id": event["chat_id"],
+                "unread_count": event["unread_count"],
+                "total_unread": event["total_unread"],
+            })
+        )

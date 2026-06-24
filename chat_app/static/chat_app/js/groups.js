@@ -24,6 +24,7 @@ const searchInput = document.querySelector("#search-friends")
 const userItems = document.querySelectorAll(".group-friend")
 const addGroupAvatarButton = document.getElementById("add-group-avatar-input")
 
+const csrfToken = document.querySelector('meta[name = "csrf-token"]').getAttribute('content')
 
 // Відстеження введення назви групи для задавання звичайної аватарки
 groupNameInput.addEventListener(
@@ -234,3 +235,61 @@ nextGroupStepButton.addEventListener("click", showNameStep)
 backGroupStepButton.addEventListener("click", showUsersStep)
 createGroupButton.addEventListener("click", createGroup)
 groupUserCheckboxes.forEach((checkbox) => {checkbox.addEventListener("change", updateSelectedCount)})
+
+export function renderGroupUser(user, groupId) {
+    const item = document.createElement("div");
+    item.className = "group-user-item";
+
+    item.innerHTML = `
+        <div class="group-user-left">
+            <div class="contact-avatar">
+                <img src="${user.avatar}" class="group-user-avatar">
+            </div>
+            <h3>${user.nickname}</h3>
+        </div>
+
+        <button class="remove-user-btn" data-user-id="${user.id}">
+            <img src="${deleteImage}">
+        </button>
+    `;
+
+    item.querySelector(".remove-user-btn").addEventListener("click", async () => {
+        await removeUserFromGroup(groupId, user.id);
+        item.remove();
+    });
+
+    return item;
+}
+
+export async function openEditGroupModal(groupId) {
+    const res = await fetch(`/chat/group/${groupId}/edit/`);
+    const data = await res.json();
+
+    document.getElementById("edit-group-name").value = data.name;
+
+    const list = document.getElementById("group-users-list");
+    list.innerHTML = "";
+
+    data.users.forEach(user => {
+        list.appendChild(renderGroupUser(user, groupId));
+    });
+
+    // document.getElementById("edit-group-big-modal").style.display = "block";
+}
+
+export async function removeUserFromGroup(groupId, userId) {
+    const res = await fetch(`/chat/group/${groupId}/remove-user/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": csrfToken,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ user_id: userId })
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+        alert("Не вдалося видалити користувача");
+    }
+}

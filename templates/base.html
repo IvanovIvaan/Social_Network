@@ -33,9 +33,9 @@
                         <a href="{% url 'post_list' %}">
                             <div id="icon-posts" class="icon-container">
                                 <img class="icon" src="{% static 'images/header_logo/post.png' %}">
-                                <div class="icon-new">
+                                <!-- <div class="icon-new">
                                     1
-                                </div>
+                                </div> -->
                             </div>
                             <p>Мої публікації</p>
                         </a>
@@ -50,6 +50,7 @@
                         <a href="{% url 'chat' %}">
                             <div id="icon-chats" class="icon-container">
                                 <img class= "icon" src="{% static 'images/header_logo/chat.png' %}">
+                                <div class="icon-new" id="all-unread-count"></div>
                             </div>
                             <p>Чати</p>
                         </a>
@@ -128,8 +129,9 @@
         <footer>
             {% block footer %}{% endblock %}
         </footer>
-            <script src = "{% static 'post_app/js/post.js' %}"></script>
-            <script src = "{% static 'js/lightningLinks.js' %}"></script>
+            <script type="module" src = "{% static 'post_app/js/post.js' %}"></script>
+            <script type="module" src = "{% static 'js/lightningLinks.js' %}"></script>
+            <script type="module" src = "{% static 'js/update_unread.js' %}"></script>
             {% block scripts %}{% endblock %}
     </body>
 </html>

@@ -2,13 +2,14 @@ from django.core.files.base import ContentFile
 from PIL import Image, ImageFilter
 from io import BytesIO
 
-MAX_COMPRESSED_IMAGE_SIZE = 1 * 1024 * 1024 # 1 Mb
+# MAX_COMPRESSED_IMAGE_SIZE = 1 * 1024 * 1024 # 1 Mb
 
-def _compressed_image(image):
+def _compressed_image(image, size, blur):
         image.seek(0)
         compressed_image = Image.open(image)
         compressed_image = compressed_image.convert("RGB")
-        compressed_image = compressed_image.filter(ImageFilter.GaussianBlur(radius=2))
+        if blur == True:
+            compressed_image = compressed_image.filter(ImageFilter.GaussianBlur(radius=3))
         
         quality = 85
         width, height = compressed_image.size
@@ -17,7 +18,7 @@ def _compressed_image(image):
             buffer = BytesIO()
             compressed_image.save(fp= buffer, format= 'JPEG', quality= quality, optimize= True)
             
-            if buffer.tell() <= MAX_COMPRESSED_IMAGE_SIZE:
+            if buffer.tell() <= size:
                 break
             
             if quality > 35:

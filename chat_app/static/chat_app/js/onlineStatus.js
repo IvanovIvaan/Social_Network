@@ -10,26 +10,28 @@ onlineSocket.onmessage = function(event) {
             const statusBadge = button.querySelector('.status-badge')
             const chatUserId = button.getAttribute("data-chat-user")
             const chatInfoText = document.querySelector(".user-info-text")
-            const statusText = document.createElement('h4')
+            const statusText = document.querySelector(".user-info-text h4")
+            const userStatus = button.dataset.userStatus
+            
             if (data.status == 'online') {
-                console.log(`${nickname} (У мережі)`)
+                // console.log(`${nickname} (У мережі)`)
                 if (statusBadge) {
                     statusBadge.style.backgroundColor = "#22C55E"
                 }
-                statusText.textContent = "У мережі"
+
+                button.dataset.userStatus = "online"
                 if (chatInfoText && chatUserId === chatInfoText.dataset.userId) {
-                    chatInfoText.appendChild(statusText)
+                    statusText.textContent = "У мережі"
                 }
             }else{
-                console.log(`${nickname} (Не в мережі)`)
+                // console.log(`${nickname} (Не в мережі)`)
                 if (statusBadge) {
                     statusBadge.style.backgroundColor = "#CDCED2"
                 }
-                statusText.textContent = "Не в мережі"
-                console.log(chatUserId)
-                console.log(chatInfoText.getAttribute("data-user-id"))
+
+                button.dataset.userStatus = "offline"
                 if (chatInfoText && chatUserId === chatInfoText.dataset.userId) {
-                    chatInfoText.appendChild(statusText)
+                    statusText.textContent = "Не в мережі"
                 }
             }
         }

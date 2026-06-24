@@ -215,7 +215,6 @@ hr {
     flex-direction: column;
     max-height: 28vh;
     overflow-y: scroll;
-    /* gap: 1.7vh; */
 }
 
 .selected-user {
@@ -268,7 +267,7 @@ hr {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    align-items: center;
+    align-items: end;
     gap: 0.7vw;
     flex-wrap: nowrap;
 }
@@ -336,8 +335,8 @@ hr {
     align-items: center;
     flex-shrink: 0;
 
-    width: 4.8vh;
-    height: 4.8vh;
+    width: 5.4vh;
+    height: 5.4vh;
     background-color: #493147;
     border-radius: 1234px;
     overflow: hidden;
@@ -419,4 +418,45 @@ hr {
 
 .add-group-avatar input {
     display: none;
+}
+
+.group-user-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9vh 0.7vw 0.9vh 0;
+}
+.group-user-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.group-users-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 29vh;
+    overflow-y: auto;
+}
+
+.remove-user-btn {
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 2.5vh;
+    height: 2.5vh;
+
+    cursor: pointer;
+}
+
+.remove-user-btn img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.2s ease;
 }

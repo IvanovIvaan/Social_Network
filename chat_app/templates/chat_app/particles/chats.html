@@ -10,12 +10,13 @@
     </div>
     <div id= 'chats_list' class="chats-list">
         {% for chat in personal_chats %}
-            <button id= 'other_user_button' type= "button" class="chat" 
+            <button id= 'other_user_button' type= "button" class="chat {% if chat.unread_count %}chat-has-unread{% endif %}" 
                 data-chat-id="{{ chat.id }}"
                 data-chat-user="{{ chat.user_id }}"
                 data-chat-username="{{ chat.username }}"
                 data-chat-nickname="{{ chat.nickname }}"
                 data-chat-avatar="{{ chat.avatar }}"
+                data-user-status="offline"
                 >
                     
                 <div class="chats-image">
@@ -26,7 +27,7 @@
                 <div class="chat-text">
                     <div class="chat-info">
                         <h3>{{ chat.nickname }}</h3>
-                        <p>{{ chat.last_message.text|default:"Немає повідомлень" }}</p>
+                        <p>{{ chat.last_message_text|truncatechars:"30" | default:"Немає повідомлень" }}</p>
                         <!-- <p>Привіт</p> -->
                     </div>
                     <div class="new-messages">

@@ -11,6 +11,8 @@ class Chat(models.Model):
 
     is_group = models.BooleanField(default= False)
     avatar = models.ImageField(upload_to= 'chat_avatars/', blank= True, null= True)
+    last_message_text = models.TextField(blank=True, null=True)
+    last_message_time = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.name or f"Chat {self.id}"
